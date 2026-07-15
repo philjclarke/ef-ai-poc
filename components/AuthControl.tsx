@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { CaretIcon, PersonIcon } from "./icons";
 
 // Simulated auth for the prototype: ?state=logged-in stands in for a real
 // session until EdCo/Apollo supplies authentication.
@@ -19,9 +20,13 @@ export function AuthActions() {
   if (loggedIn) {
     return (
       <div className="flex items-center gap-4">
-        <span className="text-base font-bold">My account</span>
+        <a href="#" className="flex items-center gap-2 text-base">
+          <PersonIcon className="text-ef-indigo" />
+          My Account
+          <CaretIcon className="w-3 fill-ef-indigo" />
+        </a>
         <Link href={toggleHref} className="text-base underline">
-          Log out
+          Log Out
         </Link>
       </div>
     );

@@ -4,6 +4,8 @@ export type RelatedCard = {
   phase: "Primary" | "Secondary";
   ageRange?: string;
   image: string;
+  action?: "watch" | "download";
+  partOfLesson?: boolean;
 };
 
 export type Resource = {
@@ -15,6 +17,7 @@ export type Resource = {
   defaultTopic: string;
   description: string;
   image: string;
+  downloadUrl?: string;
   topics: string[];
   about: string[];
   relatedTopic: string;
@@ -34,6 +37,8 @@ export const resources: Resource[] = [
     description:
       "Keep your class busy this autumn with twelve days of 10-minute activities including fun science questions and words of the day.",
     image: "/ef/autumn-science-hunt.png",
+    downloadUrl:
+      "https://energisingfutures.co.uk/wp-content/uploads/2025/09/EF_AutumnScienceHunt_Primary_Presentation.pptx",
     topics: [
       "Materials",
       "Weather",
@@ -57,6 +62,8 @@ export const resources: Resource[] = [
         phase: "Primary",
         ageRange: "7-11",
         image: "/ef/related/ES_Circuits-animation-VID-1996x1228px-297x183.jpg",
+        action: "watch",
+        partOfLesson: true,
       },
       {
         title: "Circuits and symbols activity sheet 1",
@@ -65,6 +72,8 @@ export const resources: Resource[] = [
         ageRange: "7-11",
         image:
           "/ef/related/ES_Circuits-and-symbols-activity-sheet-1_Thumbnnail-1996x1228px-297x183.jpg",
+        action: "download",
+        partOfLesson: true,
       },
       {
         title: "Circuits investigation planning sheet",
@@ -73,6 +82,8 @@ export const resources: Resource[] = [
         ageRange: "7-11",
         image:
           "/ef/related/ES_Circuits-investigation-planning-sheet_Thumbnnail-1996x1228px-297x183.jpg",
+        action: "download",
+        partOfLesson: true,
       },
       {
         title: "Circuits and symbols activity sheet 2",
@@ -81,6 +92,8 @@ export const resources: Resource[] = [
         ageRange: "7-11",
         image:
           "/ef/related/ES_Circuits-and-symbols-activity-sheet-2_Thumbnnail-1996x1228px-297x183.jpg",
+        action: "download",
+        partOfLesson: true,
       },
       {
         title: "Electric helicopter animation",
@@ -89,6 +102,8 @@ export const resources: Resource[] = [
         ageRange: "7-11",
         image:
           "/ef/related/ES_Electric-Helicopters-animation-VID-1996x1228px-297x183.jpg",
+        action: "watch",
+        partOfLesson: true,
       },
       {
         title: "Electric helicopter presentation",
@@ -97,6 +112,8 @@ export const resources: Resource[] = [
         ageRange: "7-11",
         image:
           "/ef/related/ES_Design-an-electric-helicopter-PPT_Thumbnnail-1996x1228px-297x183.jpg",
+        action: "download",
+        partOfLesson: true,
       },
     ],
   },

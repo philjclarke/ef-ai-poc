@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BookmarkButton } from "@/components/BookmarkButton";
 import { ScienceCapitalGenerator } from "@/components/generator/ScienceCapitalGenerator";
-import { BookmarkIcon, DownloadIcon, SquiggleIcon } from "@/components/icons";
+import { DownloadIcon, SquiggleIcon } from "@/components/icons";
 import { ReadyToAccess } from "@/components/ReadyToAccess";
 import { RelatedResources } from "@/components/RelatedResources";
+import { ShareResource } from "@/components/ShareResource";
 import { SignInTeaser } from "@/components/SignInTeaser";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -60,12 +62,7 @@ export default async function ResourcePage({
               </div>
               <div className="absolute right-4 top-4 flex items-center gap-3">
                 <span className="ef-pill !bg-ef-teal">{resource.ageRange}</span>
-                <span
-                  className="flex size-8 items-center justify-center rounded-full border-2 border-ef-indigo bg-ef-indigo"
-                  aria-label="Bookmark"
-                >
-                  <BookmarkIcon className="fill-white" />
-                </span>
+                <BookmarkButton loggedIn={loggedIn} signInHref={signInHref} />
               </div>
             </div>
 
@@ -85,37 +82,40 @@ export default async function ResourcePage({
 
           <div className="lg:col-span-5">
             <Link
-              href={loggedIn ? "#" : signInHref}
+              href={loggedIn ? (resource.downloadUrl ?? "#") : signInHref}
               className="ef-btn w-full !py-6 !text-xl"
             >
               <DownloadIcon className="fill-white" />
               Download
             </Link>
 
-            <div className="mt-5">
+            <div className="mt-5 grid gap-5">
               {loggedIn ? (
-                <div className="rounded-2xl bg-ef-indigo p-6 text-center text-white sm:p-10">
-                  <SquiggleIcon className="mx-auto mb-4 w-9 fill-ef-yellow" />
-                  <p className="font-heading text-sm font-bold uppercase tracking-wide text-ef-yellow">
-                    New · AI-powered
-                  </p>
-                  <h4 className="mt-2 text-xl">
-                    Make this resource local to your class
-                  </h4>
-                  <p className="mt-3 text-[1.0625rem] text-white/85">
-                    Generate a bespoke Science Capital teaching resource for{" "}
-                    {resource.title.toLowerCase()} — built around your students,
-                    their families and your local area.
-                  </p>
-                  <div className="mt-5">
-                    <a
-                      href="#science-capital-generator"
-                      className="ef-btn w-full !border-white !bg-white !text-ef-indigo"
-                    >
-                      Try it below
-                    </a>
+                <>
+                  <ShareResource slug={resource.slug} />
+                  <div className="rounded-2xl bg-ef-indigo p-6 text-center text-white sm:p-10">
+                    <SquiggleIcon className="mx-auto mb-4 w-9 fill-ef-yellow" />
+                    <p className="font-heading text-sm font-bold uppercase tracking-wide text-ef-yellow">
+                      New · AI-powered
+                    </p>
+                    <h4 className="mt-2 text-xl">
+                      Make this resource local to your class
+                    </h4>
+                    <p className="mt-3 text-[1.0625rem] text-white/85">
+                      Generate a bespoke Science Capital teaching resource for{" "}
+                      {resource.title.toLowerCase()} — built around your students,
+                      their families and your local area.
+                    </p>
+                    <div className="mt-5">
+                      <a
+                        href="#science-capital-generator"
+                        className="ef-btn w-full !border-white !bg-white !text-ef-indigo"
+                      >
+                        Try it below
+                      </a>
+                    </div>
                   </div>
-                </div>
+                </>
               ) : (
                 <ReadyToAccess signInHref={signInHref} />
               )}
@@ -131,7 +131,7 @@ export default async function ResourcePage({
           )}
         </section>
 
-        <RelatedResources resource={resource} />
+        <RelatedResources resource={resource} loggedIn={loggedIn} />
       </main>
       <SiteFooter />
     </>

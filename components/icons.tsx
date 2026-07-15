@@ -32,3 +32,46 @@ export function SquiggleIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+export function PersonIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" className={className}>
+      <circle cx="7" cy="4" r="3" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+      <path d="m1,13c2.66667-2.66667,9.33333-2.66667,12,0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+      <path d="m13,13c-2.66667,2.66667-9.33333,2.66667-12,0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+    </svg>
+  );
+}
+
+export function CaretIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" className={className}>
+      <path d="m8,9c-.25586,0-.51172-.09766-.70703-.29297L.29297,1.70703C-.09766,1.31641-.09766.68359.29297.29297S1.31641-.09766,1.70703.29297l6.29297,6.29297L14.29297.29297c.39062-.39062,1.02344-.39062,1.41406,0s.39062,1.02344,0,1.41406l-7,7c-.19531.19531-.45117.29297-.70703.29297Z" />
+    </svg>
+  );
+}
+
+export function ShareIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" className={className}>
+      <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+    </svg>
+  );
+}
+
+export function CopyIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" className={className}>
+      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+    </svg>
+  );
+}
+
+export function VideoIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" className={className}>
+      <path d="m9,12H2c-1.10303,0-2-.89697-2-2V2C0,.89697.89697,0,2,0h7c1.10303,0,2,.89697,2,2v8c0,1.10303-.89697,2-2,2ZM2,2v8h7.00146l-.00146-8H2Z" />
+      <path d="m15,11c-.22266,0-.44385-.07471-.62451-.21924l-5-4c-.2373-.18945-.37549-.47705-.37549-.78076s.13818-.59131.37549-.78076L14.37549,1.21924c.30078-.23975.7124-.28613,1.05762-.12061.34668.1665.56689.51709.56689.90137v8c0,.38428-.22021.73486-.56689.90137-.1377.06592-.28564.09863-.43311.09863Zm-3.39941-5l2.39941,1.91943v-3.83887l-2.39941,1.91943Z" />
+    </svg>
+  );
+}
