@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { SquiggleIcon } from "@/components/icons";
 import type { Resource } from "@/lib/resources";
 import type { GenerateRequest, TeachingResource } from "@/lib/types";
 import { GeneratedResource } from "./GeneratedResource";
@@ -25,12 +26,12 @@ function LoadingState() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-3 rounded-2xl bg-white p-10 text-center shadow-sm">
+    <div className="ef-bordered flex flex-col items-center gap-4 bg-white p-12 text-center">
       <span
         aria-hidden
-        className="size-8 animate-spin rounded-full border-4 border-ef-mist border-t-ef-coral-deep"
+        className="size-9 animate-spin rounded-full border-4 border-ef-mist border-t-ef-indigo"
       />
-      <p role="status" className="text-sm font-medium text-ef-indigo/70">
+      <p role="status" className="text-[1.0625rem] font-medium">
         {loadingMessages[messageIndex]}
       </p>
     </div>
@@ -66,16 +67,18 @@ export function ScienceCapitalGenerator({ resource }: { resource: Resource }) {
 
   return (
     <div className="grid gap-6">
-      <div className="rounded-2xl bg-white p-5 shadow-sm sm:p-6">
-        <h3 className="font-heading text-lg font-semibold">
-          Make this resource local to your class
-        </h3>
-        <p className="mt-1 text-sm text-ef-indigo/70">
+      <div className="ef-bordered bg-white p-6 sm:p-10">
+        <SquiggleIcon className="mb-4 w-9 fill-ef-indigo" />
+        <p className="font-heading text-sm font-bold uppercase tracking-wide">
+          New · AI-powered
+        </p>
+        <h3 className="mt-2 text-2xl">Make this resource local to your class</h3>
+        <p className="mt-2 max-w-2xl text-[1.0625rem]">
           Tell us a little about your students and we&apos;ll generate a bespoke
           Science Capital teaching resource — a local news story, a local role model,
           two local jobs and five conversation starters.
         </p>
-        <div className="mt-4">
+        <div className="mt-6">
           <GeneratorForm
             resource={resource}
             isGenerating={status === "loading"}
@@ -87,13 +90,13 @@ export function ScienceCapitalGenerator({ resource }: { resource: Resource }) {
       {status === "loading" && <LoadingState />}
 
       {status === "error" && (
-        <p className="rounded-2xl bg-ef-coral/20 p-4 text-sm">
+        <p className="ef-bordered bg-ef-coral/15 p-5 text-[1.0625rem]">
           Something went wrong generating your resource. Please try again.
         </p>
       )}
 
       {status === "done" && result && (
-        <div ref={resultRef} className="scroll-mt-24">
+        <div ref={resultRef} className="scroll-mt-8">
           <GeneratedResource resource={result} />
         </div>
       )}

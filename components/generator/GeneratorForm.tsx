@@ -6,6 +6,9 @@ import { mockSchoolProfile } from "@/lib/resources";
 import type { GenerateRequest } from "@/lib/types";
 import { TagInput } from "./TagInput";
 
+const fieldClasses =
+  "mt-1.5 w-full rounded-[5px] border border-ef-border bg-white px-4 py-3 text-[1.0625rem] outline-none focus:border-ef-indigo focus:ring-1 focus:ring-ef-indigo";
+
 type GeneratorFormProps = {
   resource: Resource;
   isGenerating: boolean;
@@ -33,28 +36,28 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-4">
-      <div className="grid gap-4 sm:grid-cols-2">
+    <form onSubmit={handleSubmit} className="grid gap-5">
+      <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="topic" className="block text-sm font-semibold">
+          <label htmlFor="topic" className="block text-base font-bold">
             Topic
           </label>
           <input
             id="topic"
             value={topic}
             required
-            className="mt-1.5 w-full rounded-lg border border-ef-border bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ef-indigo/30"
+            className={fieldClasses}
             onChange={(e) => setTopic(e.target.value)}
           />
         </div>
         <div>
-          <label htmlFor="yearGroup" className="block text-sm font-semibold">
+          <label htmlFor="yearGroup" className="block text-base font-bold">
             Year group
           </label>
           <select
             id="yearGroup"
             value={yearGroup}
-            className="mt-1.5 w-full rounded-lg border border-ef-border bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ef-indigo/30"
+            className={fieldClasses}
             onChange={(e) => setYearGroup(e.target.value)}
           >
             {resource.yearGroups.map((yg) => (
@@ -65,10 +68,10 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
       </div>
 
       <div>
-        <label htmlFor="location" className="block text-sm font-semibold">
+        <label htmlFor="location" className="block text-base font-bold">
           Location
         </label>
-        <p className="mt-0.5 text-xs text-ef-indigo/60">
+        <p className="mt-0.5 text-sm text-ef-indigo/60">
           Pre-filled from your school profile ({mockSchoolProfile.schoolName}) — edit if
           you like
         </p>
@@ -76,7 +79,7 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
           id="location"
           value={location}
           required
-          className="mt-1.5 w-full rounded-lg border border-ef-border bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ef-indigo/30"
+          className={fieldClasses}
           onChange={(e) => setLocation(e.target.value)}
         />
       </div>
@@ -102,7 +105,7 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
       <button
         type="submit"
         disabled={isGenerating}
-        className="mt-1 inline-flex items-center justify-center rounded-full bg-ef-coral-deep px-6 py-3 font-heading text-sm font-semibold text-white transition hover:bg-ef-coral disabled:cursor-not-allowed disabled:opacity-60"
+        className="ef-btn mt-1 justify-self-start !px-9 !py-4 !text-xl disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isGenerating ? "Generating…" : "Generate teaching resource"}
       </button>

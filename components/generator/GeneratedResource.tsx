@@ -2,12 +2,9 @@ import type { LocalJob, TeachingResource } from "@/lib/types";
 
 function DimensionPills({ dimensions }: { dimensions: string[] }) {
   return (
-    <ul className="mt-3 flex flex-wrap gap-1.5">
+    <ul className="mt-4 flex flex-wrap gap-2">
       {dimensions.map((dimension) => (
-        <li
-          key={dimension}
-          className="rounded-full bg-ef-teal/30 px-2.5 py-0.5 text-xs font-medium"
-        >
+        <li key={dimension} className="ef-pill !bg-ef-teal/60 !text-sm">
           {dimension}
         </li>
       ))}
@@ -23,8 +20,8 @@ function SectionCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl bg-white p-5 shadow-sm sm:p-6">
-      <p className="text-xs font-semibold uppercase tracking-wide text-ef-coral-deep">
+    <section className="ef-bordered bg-white p-6 sm:p-8">
+      <p className="font-heading text-sm font-bold uppercase tracking-wide">
         {eyebrow}
       </p>
       {children}
@@ -34,8 +31,8 @@ function SectionCard({
 
 function ScienceCapitalCallout({ text }: { text: string }) {
   return (
-    <p className="mt-3 rounded-lg border-l-4 border-ef-yellow bg-ef-yellow/10 px-3 py-2 text-sm">
-      <span className="font-semibold">Science Capital link: </span>
+    <p className="mt-5 rounded-xl bg-ef-yellow p-4 text-[1.0625rem] shadow-[8px_8px_0_#110e63]">
+      <span className="font-bold">Science Capital link: </span>
       {text}
     </p>
   );
@@ -43,16 +40,13 @@ function ScienceCapitalCallout({ text }: { text: string }) {
 
 function SkillChips({ label, skills }: { label: string; skills: string[] }) {
   return (
-    <div className="mt-3">
-      <p className="text-xs font-semibold uppercase tracking-wide text-ef-indigo/60">
+    <div className="mt-4">
+      <p className="font-heading text-xs font-bold uppercase tracking-wide text-ef-indigo/60">
         {label}
       </p>
-      <ul className="mt-1 flex flex-wrap gap-1.5">
+      <ul className="mt-1.5 flex flex-wrap gap-1.5">
         {skills.map((skill) => (
-          <li
-            key={skill}
-            className="rounded-full bg-ef-mist px-2.5 py-0.5 text-xs font-medium"
-          >
+          <li key={skill} className="ef-pill !text-sm">
             {skill}
           </li>
         ))}
@@ -63,28 +57,28 @@ function SkillChips({ label, skills }: { label: string; skills: string[] }) {
 
 function JobCard({ job }: { job: LocalJob }) {
   return (
-    <div className="flex flex-col rounded-xl border border-ef-border bg-ef-surface/60 p-4">
+    <div className="ef-bordered flex flex-col bg-ef-box p-5">
       <span
-        className={`self-start rounded-full px-2.5 py-0.5 text-xs font-semibold text-white ${
+        className={`self-start rounded-full px-3 py-1 font-heading text-xs font-bold uppercase text-white ${
           job.route === "degree" ? "bg-ef-indigo" : "bg-ef-green"
         }`}
       >
         {job.route === "degree" ? "Degree route" : "Apprenticeship route"}
       </span>
-      <h4 className="mt-2 text-base font-semibold">{job.title}</h4>
-      <p className="text-sm text-ef-indigo/70">{job.employer}</p>
-      <p className="mt-2 text-sm">
-        <span className="font-semibold">Qualifications: </span>
+      <h4 className="mt-3 text-xl">{job.title}</h4>
+      <p className="text-[1.0625rem] text-ef-indigo/70">{job.employer}</p>
+      <p className="mt-3 text-[1.0625rem]">
+        <span className="font-bold">Qualifications: </span>
         {job.qualifications}
       </p>
-      <p className="mt-2 text-sm">{job.summary}</p>
+      <p className="mt-3 text-[1.0625rem]">{job.summary}</p>
       <SkillChips label="Future skills" skills={job.futureSkills} />
       <SkillChips label="SkillsBuilder" skills={job.skillsBuilderSkills} />
-      <div className="mt-3">
-        <p className="text-xs font-semibold uppercase tracking-wide text-ef-indigo/60">
+      <div className="mt-4">
+        <p className="font-heading text-xs font-bold uppercase tracking-wide text-ef-indigo/60">
           Connections for your class
         </p>
-        <ul className="mt-1 list-disc space-y-1 pl-4 text-sm">
+        <ul className="mt-1.5 list-disc space-y-1.5 pl-5 text-[1.0625rem]">
           {job.connections.map((connection) => (
             <li key={connection}>{connection}</li>
           ))}
@@ -99,30 +93,29 @@ export function GeneratedResource({ resource }: { resource: TeachingResource }) 
   const { meta, newsStory, notableFigure, jobs, conversationStarters } = resource;
 
   return (
-    <div className="grid gap-4">
-      <div className="rounded-2xl bg-ef-indigo p-5 text-white sm:p-6">
-        <p className="text-xs font-semibold uppercase tracking-wide text-ef-teal">
+    <div className="grid gap-5">
+      <div className="rounded-2xl bg-ef-indigo p-6 text-white sm:p-8">
+        <p className="font-heading text-sm font-bold uppercase tracking-wide text-ef-teal">
           Science Capital teaching resource
         </p>
-        <h3 className="mt-1 font-heading text-xl font-semibold">
+        <h3 className="mt-1 text-2xl">
           {meta.topic} · {meta.yearGroup} · {meta.location}
         </h3>
         {(meta.interests.length > 0 || meta.occupations.length > 0) && (
-          <p className="mt-2 text-sm text-white/80">
-            Tailored to{" "}
-            {[...meta.interests, ...meta.occupations].join(", ")}
+          <p className="mt-2 text-[1.0625rem] text-white/80">
+            Tailored to {[...meta.interests, ...meta.occupations].join(", ")}
           </p>
         )}
       </div>
 
       <SectionCard eyebrow="1 · Local news story">
-        <h4 className="mt-1 text-base font-semibold">{newsStory.headline}</h4>
-        <p className="mt-2 text-sm">{newsStory.summary}</p>
+        <h4 className="mt-2 text-xl">{newsStory.headline}</h4>
+        <p className="mt-3 text-[1.0625rem]">{newsStory.summary}</p>
         <a
           href={newsStory.sourceUrl}
           target="_blank"
           rel="noreferrer"
-          className="mt-2 inline-block text-sm font-medium text-ef-coral-deep underline underline-offset-2"
+          className="mt-3 inline-block text-[1.0625rem] underline"
         >
           Source: {newsStory.sourceName}
         </a>
@@ -131,42 +124,36 @@ export function GeneratedResource({ resource }: { resource: TeachingResource }) 
       </SectionCard>
 
       <SectionCard eyebrow="2 · Local notable figure">
-        <h4 className="mt-1 text-base font-semibold">
+        <h4 className="mt-2 text-xl">
           {notableFigure.name}
           {notableFigure.dates && (
             <span className="font-normal text-ef-indigo/60"> ({notableFigure.dates})</span>
           )}{" "}
           — {notableFigure.location}
         </h4>
-        <p className="mt-2 text-sm">{notableFigure.summary}</p>
+        <p className="mt-3 text-[1.0625rem]">{notableFigure.summary}</p>
         <ScienceCapitalCallout text={notableFigure.scienceCapitalLink} />
         <DimensionPills dimensions={notableFigure.dimensions} />
       </SectionCard>
 
       <SectionCard eyebrow="3 · Two local jobs">
-        <div className="mt-2 grid gap-4 lg:grid-cols-2">
+        <div className="mt-3 grid gap-5 lg:grid-cols-2">
           <JobCard job={jobs[0]} />
           <JobCard job={jobs[1]} />
         </div>
       </SectionCard>
 
       <SectionCard eyebrow="4 · Conversation starters">
-        <ol className="mt-2 grid gap-3">
+        <ol className="mt-3 grid gap-4">
           {conversationStarters.map((starter, index) => (
-            <li
-              key={starter.title}
-              className="rounded-xl border border-ef-border bg-ef-surface/60 p-4"
-            >
-              <h4 className="text-sm font-semibold">
+            <li key={starter.title} className="ef-bordered bg-ef-box p-5">
+              <h4 className="text-lg">
                 {index + 1}. {starter.title}
               </h4>
-              <p className="mt-1 text-sm">{starter.prompt}</p>
-              <ul className="mt-2 flex flex-wrap gap-1.5">
+              <p className="mt-2 text-[1.0625rem]">{starter.prompt}</p>
+              <ul className="mt-3 flex flex-wrap gap-1.5">
                 {starter.connects.map((connect) => (
-                  <li
-                    key={connect}
-                    className="rounded-full bg-ef-purple/25 px-2.5 py-0.5 text-xs font-medium"
-                  >
+                  <li key={connect} className="ef-pill !bg-ef-purple/30 !text-sm">
                     {connect}
                   </li>
                 ))}
@@ -176,7 +163,7 @@ export function GeneratedResource({ resource }: { resource: TeachingResource }) 
         </ol>
       </SectionCard>
 
-      <p className="text-center text-xs text-ef-indigo/50">
+      <p className="text-center text-sm text-ef-indigo/50">
         Sample output for prototype purposes — content is illustrative, not verified.
       </p>
     </div>

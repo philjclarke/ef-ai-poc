@@ -33,16 +33,13 @@ export function TagInput({ id, label, hint, placeholder, tags, onChange }: TagIn
 
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-semibold">
+      <label htmlFor={id} className="block text-base font-bold">
         {label}
       </label>
-      <p className="mt-0.5 text-xs text-ef-indigo/60">{hint}</p>
-      <div className="mt-1.5 flex flex-wrap items-center gap-1.5 rounded-lg border border-ef-border bg-white px-2 py-1.5 focus-within:ring-2 focus-within:ring-ef-indigo/30">
+      <p className="mt-0.5 text-sm text-ef-indigo/60">{hint}</p>
+      <div className="mt-1.5 flex flex-wrap items-center gap-2 rounded-[5px] border border-ef-border bg-white px-3 py-2 focus-within:border-ef-indigo focus-within:ring-1 focus-within:ring-ef-indigo">
         {tags.map((tag) => (
-          <span
-            key={tag}
-            className="inline-flex items-center gap-1 rounded-full bg-ef-mist px-2.5 py-0.5 text-sm"
-          >
+          <span key={tag} className="ef-pill items-center gap-1.5">
             {tag}
             <button
               type="button"
@@ -58,7 +55,7 @@ export function TagInput({ id, label, hint, placeholder, tags, onChange }: TagIn
           id={id}
           value={draft}
           placeholder={tags.length ? "" : placeholder}
-          className="min-w-32 flex-1 bg-transparent py-0.5 text-sm outline-none placeholder:text-ef-indigo/40"
+          className="min-w-32 flex-1 bg-transparent py-1.5 text-[1.0625rem] outline-none placeholder:text-ef-indigo/40"
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={commitDraft}

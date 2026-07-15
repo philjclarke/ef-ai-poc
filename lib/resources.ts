@@ -1,3 +1,11 @@
+export type RelatedCard = {
+  title: string;
+  text: string;
+  phase: "Primary" | "Secondary";
+  ageRange?: string;
+  image: string;
+};
+
 export type Resource = {
   slug: string;
   title: string;
@@ -6,9 +14,15 @@ export type Resource = {
   yearGroups: string[];
   defaultTopic: string;
   description: string;
-  accent: "coral" | "teal" | "yellow";
+  image: string;
+  topics: string[];
+  about: string[];
+  relatedTopic: string;
+  related: RelatedCard[];
 };
 
+// Content mirrored from the live energisingfutures.co.uk resource pages
+// (logged-out views) so the prototype starts from what the pages look like today.
 export const resources: Resource[] = [
   {
     slug: "autumn-science-hunt",
@@ -19,7 +33,72 @@ export const resources: Resource[] = [
     defaultTopic: "Autumn and seasonal change",
     description:
       "Keep your class busy this autumn with twelve days of 10-minute activities including fun science questions and words of the day.",
-    accent: "coral",
+    image: "/ef/autumn-science-hunt.png",
+    topics: [
+      "Materials",
+      "Weather",
+      "Animals, including humans",
+      "Everyday materials",
+      "Living things and their habitats",
+      "Plants",
+      "Seasonal changes",
+      "Working scientifically",
+      "Sound",
+    ],
+    about: [
+      "Bring autumnal science to life by linking classroom learning to the great outdoors with this quiz. Keep your class busy with twelve days of 10-minute activities including fun science questions, word of the day and a dive deeper task.",
+      "Get your class hunting for the incredible science happening all around us this cozy season.",
+    ],
+    relatedTopic: "Animals, including humans",
+    related: [
+      {
+        title: "Circuits animation",
+        text: "Use this animation, to provide context for an investigation into what happens when there is more than one bulb in a circuit.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image: "/ef/related/ES_Circuits-animation-VID-1996x1228px-297x183.jpg",
+      },
+      {
+        title: "Circuits and symbols activity sheet 1",
+        text: "Use this activity sheet to identify components, use symbols and draw a circuit diagram.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image:
+          "/ef/related/ES_Circuits-and-symbols-activity-sheet-1_Thumbnnail-1996x1228px-297x183.jpg",
+      },
+      {
+        title: "Circuits investigation planning sheet",
+        text: "Plan an investigation into the effects of having more than one bulb in a circuit, with this investigation planning sheet.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image:
+          "/ef/related/ES_Circuits-investigation-planning-sheet_Thumbnnail-1996x1228px-297x183.jpg",
+      },
+      {
+        title: "Circuits and symbols activity sheet 2",
+        text: "Use this activity sheet to complete sentences about electricity and circuits and identify simple components, and working circuits.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image:
+          "/ef/related/ES_Circuits-and-symbols-activity-sheet-2_Thumbnnail-1996x1228px-297x183.jpg",
+      },
+      {
+        title: "Electric helicopter animation",
+        text: "Can you make an electric helicopter with a rotor that switches on and off? Use this animation to introduce this challenge to pupils.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image:
+          "/ef/related/ES_Electric-Helicopters-animation-VID-1996x1228px-297x183.jpg",
+      },
+      {
+        title: "Electric helicopter presentation",
+        text: "Use this presentation to give pupils ideas for their own electric helicopter designs.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image:
+          "/ef/related/ES_Design-an-electric-helicopter-PPT_Thumbnnail-1996x1228px-297x183.jpg",
+      },
+    ],
   },
   {
     slug: "planets-of-the-solar-system-poster",
@@ -30,7 +109,60 @@ export const resources: Resource[] = [
     defaultTopic: "Space and the solar system",
     description:
       "Use this classroom poster to answer questions about the order and sizes of planets in our solar system.",
-    accent: "teal",
+    image: "/ef/planets-of-the-solar-system-poster.jpg",
+    topics: ["Earth and space"],
+    about: [
+      "Use this classroom poster to answer questions about the order and sizes of planets in our solar system.",
+    ],
+    relatedTopic: "Earth and space",
+    related: [
+      {
+        title: "Maggie Aderin-Pocock life story",
+        text: "Simple information sheet describing the life, career and achievements of space scientist, inventor, and super scientist, Maggie Aderin-Pocock.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image:
+          "/ef/related/Archive_Maggie-Aderin-Pocock-Life-Story-Info-sheet_Thumbnail-1996x1228px_-297x183.jpg",
+      },
+      {
+        title: "Maggie Aderin-Pocock life story quiz",
+        text: "Ten-question quiz about the life and career of space and super scientist Maggie Aderin-Pocock, for use with the life story information sheet.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image:
+          "/ef/related/Archive_Maggie-Aderin-Pocock-Life-Story-Quiz_Thumbnail-1996x1228px_-297x183.jpg",
+      },
+      {
+        title: "Maggie Aderin-Pocock space creative writing",
+        text: "Pupils use this activity sheet to name the planets in our solar system and then write creatively about visiting a neighbouring planet.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image:
+          "/ef/related/Archive_Maggie-Aderin-Pocock-Creative-Writing_Thumbnail-1996x1228px_-297x183.jpg",
+      },
+      {
+        title: "Maggie Aderin-Pocock presentation",
+        text: "Use this presentation to find out about the life, career and achievements of space scientist, inventor and super scientist, Maggie Aderin-Pocock.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image:
+          "/ef/related/Archive_Maggie-Aderin-Pocock-Life-Story-PPT_Thumbnail-1996x1228px_-297x183.jpg",
+      },
+      {
+        title: "Moon poster",
+        text: "Use this poster to encourage pupils' to become Moon explorers!",
+        phase: "Primary",
+        ageRange: "7-11",
+        image: "/ef/related/12001-EF-MOON-PO-1996x1228px-297x183.jpg",
+      },
+      {
+        title: "Moon diary",
+        text: "Challenge your pupils to keep a moon diary for 28 days – use the activity sheet to record what they see.",
+        phase: "Primary",
+        ageRange: "7-11",
+        image: "/ef/related/12001-EF-MOON-WSH-1996x1228px-297x183.jpg",
+      },
+    ],
   },
   {
     slug: "periodic-table-posters",
@@ -41,7 +173,53 @@ export const resources: Resource[] = [
     defaultTopic: "Elements and the periodic table",
     description:
       "Classroom posters of the periodic table, available in simple and detailed versions (with and without lanthanides and actinides).",
-    accent: "yellow",
+    image: "/ef/periodic-table-posters.jpg",
+    topics: ["Atomic structure and the periodic table"],
+    about: [
+      "A classroom poster of the periodic table, available in simple and detailed versions (with and without lanthanides and actinides).",
+    ],
+    relatedTopic: "Atomic structure and the periodic table",
+    related: [
+      {
+        title: "Periodic table challenge interactive",
+        text: "An interactive game helping students develop and test their knowledge of periodic table elements, and their properties.",
+        phase: "Secondary",
+        image: "/ef/related/Periodic-Table-Interactive_Thumbnail-1-297x183.png",
+      },
+      {
+        title: "Periodic table poster (simple)",
+        text: "A classroom poster of the periodic table (without lanthanides and actinides).",
+        phase: "Secondary",
+        image:
+          "/ef/related/SIMPLE-Periodic-table-challenge-poster-Thumbnail-297x183.jpg",
+      },
+      {
+        title: "Atomic structure and the periodic table knowledge organiser",
+        text: "This two-page visual organiser contains essential knowledge for students learning about atomic structure and the periodic table.",
+        phase: "Secondary",
+        image:
+          "/ef/related/Atomic-structure-periodic-table-KO_Thumbnail-297x183.jpg",
+      },
+      {
+        title: "Check your learning: Atomic structure and the periodic table",
+        text: "A five-question assessment sheet to check how much students know about atomic structure and the periodic table.",
+        phase: "Secondary",
+        image:
+          "/ef/related/Atomic-structure-periodic-table-worksheet_Thumbnail-297x183.jpg",
+      },
+      {
+        title: "Revision resources: 2026 (11-14)",
+        text: "Find the perfect resource for your class with this handy overview of revision resources. These no-prep resources are organised into topics to save you time searching. Just print and go!",
+        phase: "Secondary",
+        image: "/ef/related/Resource-Planner-11-14-297x183.png",
+      },
+      {
+        title: "Posters (secondary)",
+        text: "A selection of vibrant posters providing essential knowledge and careers connections for a range of science topics.",
+        phase: "Secondary",
+        image: "/ef/related/EF-secondaryposters-297x183.png",
+      },
+    ],
   },
 ];
 

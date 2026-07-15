@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
+/* Colour and component values mirror the live energisingfutures.co.uk theme
+   (dist/css/app.min.css). Proxima Nova is a licensed font — Inter stands in. */
 @theme {
   --color-ef-indigo: #110e63;
-  --color-ef-indigo-soft: #2e2a85;
   --color-ef-coral: #ff8b63;
   --color-ef-coral-deep: #f66123;
   --color-ef-teal: #98cccc;
@@ -12,20 +13,66 @@
   --color-ef-purple: #d594ff;
   --color-ef-surface: #f4f4f8;
   --color-ef-mist: #e9e9f1;
+  --color-ef-box: #f2f2f7;
+  --color-ef-line: #d5d5e4;
   --color-ef-border: #cac9dd;
   --font-heading: var(--font-poppins), "Arial", sans-serif;
   --font-body: var(--font-inter), "Arial", sans-serif;
 }
 
 body {
-  background: var(--color-ef-surface);
+  background: #ffffff;
   color: var(--color-ef-indigo);
   font-family: var(--font-body);
+  font-size: 1.125rem;
 }
 
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 130%;
+}
+
+@utility ef-section {
+  width: 90%;
+  max-width: 1245px;
+  margin-inline: auto;
+}
+
+@utility ef-btn {
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid var(--color-ef-indigo);
+  background-color: var(--color-ef-indigo);
+  text-align: center;
+  color: #fff;
+  padding: 13px 24px;
+  font-size: 1.125rem;
+  transition: opacity 0.15s ease;
+}
+
+@utility ef-pill {
+  display: inline-flex;
+  border-radius: 1000px;
+  background-color: var(--color-ef-mist);
+  color: var(--color-ef-indigo);
+  text-decoration: none !important;
+  padding: 8px 14px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+@utility ef-bordered {
+  border-radius: 16px;
+  border: 1px solid var(--color-ef-line);
 }

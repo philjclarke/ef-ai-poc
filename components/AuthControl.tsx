@@ -13,20 +13,29 @@ export function useSimulatedAuth() {
   return { loggedIn, toggleHref };
 }
 
-export function AuthButton() {
+export function AuthActions() {
   const { loggedIn, toggleHref } = useSimulatedAuth();
 
+  if (loggedIn) {
+    return (
+      <div className="flex items-center gap-4">
+        <span className="text-base font-bold">My account</span>
+        <Link href={toggleHref} className="text-base underline">
+          Log out
+        </Link>
+      </div>
+    );
+  }
+
   return (
-    <Link
-      href={toggleHref}
-      className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-        loggedIn
-          ? "border border-white/40 text-white hover:bg-white/10"
-          : "bg-ef-coral-deep text-white hover:bg-ef-coral"
-      }`}
-    >
-      {loggedIn ? "Sign out" : "Log in"}
-    </Link>
+    <div className="flex items-center gap-4">
+      <Link href={toggleHref} className="text-base underline">
+        Register
+      </Link>
+      <Link href={toggleHref} className="ef-btn !px-5 !py-2 !text-base">
+        Log in
+      </Link>
+    </div>
   );
 }
 
