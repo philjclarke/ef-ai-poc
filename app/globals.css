@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ef-indigo: #110e63;
+  --color-ef-indigo-soft: #2e2a85;
+  --color-ef-coral: #ff8b63;
+  --color-ef-coral-deep: #f66123;
+  --color-ef-teal: #98cccc;
+  --color-ef-yellow: #ffcf2c;
+  --color-ef-green: #5fbe98;
+  --color-ef-blue: #80b3dd;
+  --color-ef-purple: #d594ff;
+  --color-ef-surface: #f4f4f8;
+  --color-ef-mist: #e9e9f1;
+  --color-ef-border: #cac9dd;
+  --font-heading: var(--font-poppins), "Arial", sans-serif;
+  --font-body: var(--font-inter), "Arial", sans-serif;
+}
+
+body {
+  background: var(--color-ef-surface);
+  color: var(--color-ef-indigo);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+}
