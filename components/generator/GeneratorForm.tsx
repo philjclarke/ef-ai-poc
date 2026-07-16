@@ -1,9 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import type { Resource } from "@/lib/resources";
-import { mockSchoolProfile } from "@/lib/resources";
-import type { GenerateRequest } from "@/lib/types";
 import { TagInput } from "./TagInput";
 
 const fieldClasses =
@@ -12,35 +9,35 @@ const fieldClasses =
 type GeneratorFormProps = {
   resource: Resource;
   isGenerating: boolean;
-  onGenerate: (request: GenerateRequest) => void;
+  yearGroups: string[];
+  onToggleYearGroup: (yearGroup: string) => void;
+  location: string;
+  onLocationChange: (value: string) => void;
+  interests: string[];
+  onInterestsChange: (tags: string[]) => void;
+  occupations: string[];
+  onOccupationsChange: (tags: string[]) => void;
+  onSubmit: () => void;
+  submitLabel?: string;
 };
 
-export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorFormProps) {
-  const topic = resource.defaultTopic;
-  const [yearGroups, setYearGroups] = useState<string[]>([resource.yearGroups[0]]);
-  const [location, setLocation] = useState(mockSchoolProfile.location);
-  const [interests, setInterests] = useState<string[]>([]);
-  const [occupations, setOccupations] = useState<string[]>([]);
-
-  function toggleYearGroup(yearGroup: string) {
-    setYearGroups((current) =>
-      current.includes(yearGroup)
-        ? current.filter((yg) => yg !== yearGroup)
-        : [...current, yearGroup]
-    );
-  }
-
+export function GeneratorForm({
+  resource,
+  isGenerating,
+  yearGroups,
+  onToggleYearGroup,
+  location,
+  onLocationChange,
+  interests,
+  onInterestsChange,
+  occupations,
+  onOccupationsChange,
+  onSubmit,
+  submitLabel = "Generate teaching resource",
+}: GeneratorFormProps) {
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    onGenerate({
-      webAccountId: mockSchoolProfile.webAccountId,
-      resourceId: resource.slug,
-      topic,
-      yearGroup: yearGroups.join(", "),
-      location,
-      interests,
-      occupations,
-    });
+    onSubmit();
   }
 
   return (
@@ -55,7 +52,7 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
                 key={yg}
                 type="button"
                 aria-pressed={selected}
-                onClick={() => toggleYearGroup(yg)}
+                onClick={() => onToggleYearGroup(yg)}
                 className={`ef-pill !px-3.5 !py-2 transition ${
                   selected
                     ? "!bg-ef-indigo !text-white"
@@ -81,7 +78,7 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
           value={location}
           required
           className={fieldClasses}
-          onChange={(e) => setLocation(e.target.value)}
+          onChange={(e) => onLocationChange(e.target.value)}
         />
       </div>
 
@@ -91,7 +88,7 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
         hint="Press Enter after each one"
         placeholder="Add an interest…"
         tags={interests}
-        onChange={setInterests}
+        onChange={onInterestsChange}
       />
 
       <TagInput
@@ -100,15 +97,15 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
         hint="Press Enter after each one"
         placeholder="Add an occupation…"
         tags={occupations}
-        onChange={setOccupations}
+        onChange={onOccupationsChange}
       />
 
       <button
         type="submit"
         disabled={isGenerating}
-        className="ef-btn mt-1 justify-self-start !px-8 !py-3.5 !text-lg disabled:cursor-not-allowed disabled:opacity-60"
+        className="ef-btn mt-1 justify-self-start !px-7 !py-3 !text-lg disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {isGenerating ? "Generating…" : "Generate teaching resource"}
+        {isGenerating ? "Generating…" : submitLabel}
       </button>
     </form>
   );

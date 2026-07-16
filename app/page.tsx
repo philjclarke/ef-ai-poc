@@ -76,7 +76,7 @@ export default async function HomePage({
                 </p>
                 <Link
                   href={`/resource/${resource.slug}${stateSuffix}`}
-                  className="ef-btn mt-auto w-full !py-4"
+                  className="ef-btn mt-auto w-full !py-3.5"
                 >
                   View lesson
                 </Link>

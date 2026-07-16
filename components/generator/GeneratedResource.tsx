@@ -29,12 +29,14 @@ function SectionCard({
   );
 }
 
-function ScienceCapitalCallout({ text }: { text: string }) {
+function ScienceCapitalPanel({ text }: { text: string }) {
   return (
-    <p className="mt-5 rounded-xl bg-ef-yellow p-4 text-[1.0625rem] shadow-[8px_8px_0_#110e63]">
-      <span className="font-bold">Science Capital link: </span>
-      {text}
-    </p>
+    <div className="rounded-xl bg-ef-yellow/20 p-4 sm:p-5">
+      <p className="font-heading text-xs font-bold uppercase tracking-wide text-ef-indigo/60">
+        Science Capital link
+      </p>
+      <p className="mt-1.5 text-[1.0625rem]">{text}</p>
+    </div>
   );
 }
 
@@ -90,50 +92,47 @@ function JobCard({ job }: { job: LocalJob }) {
 }
 
 export function GeneratedResource({ resource }: { resource: TeachingResource }) {
-  const { meta, newsStory, notableFigure, jobs, conversationStarters } = resource;
+  const { newsStory, notableFigure, jobs, conversationStarters } = resource;
 
   return (
     <div className="grid gap-5">
-      <div className="rounded-2xl bg-ef-indigo p-6 text-white sm:p-8">
-        <p className="font-heading text-sm font-bold uppercase tracking-wide text-ef-teal">
-          Science Capital teaching resource
-        </p>
-        <h3 className="mt-1 text-2xl">
-          {meta.topic} · {meta.yearGroup} · {meta.location}
-        </h3>
-        {(meta.interests.length > 0 || meta.occupations.length > 0) && (
-          <p className="mt-2 text-[1.0625rem] text-white/80">
-            Tailored to {[...meta.interests, ...meta.occupations].join(", ")}
-          </p>
-        )}
-      </div>
-
       <SectionCard eyebrow="1 · Local news story">
-        <h4 className="mt-2 text-xl">{newsStory.headline}</h4>
-        <p className="mt-3 text-[1.0625rem]">{newsStory.summary}</p>
-        <a
-          href={newsStory.sourceUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-3 inline-block text-[1.0625rem] underline"
-        >
-          Source: {newsStory.sourceName}
-        </a>
-        <ScienceCapitalCallout text={newsStory.scienceCapitalLink} />
-        <DimensionPills dimensions={newsStory.dimensions} />
+        <div className="mt-2 grid gap-6 lg:grid-cols-[7fr_3fr]">
+          <div>
+            <h4 className="text-xl">{newsStory.headline}</h4>
+            <p className="mt-3 text-[1.0625rem]">{newsStory.summary}</p>
+            <a
+              href={newsStory.sourceUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-block text-[1.0625rem] underline"
+            >
+              Source: {newsStory.sourceName}
+            </a>
+            <DimensionPills dimensions={newsStory.dimensions} />
+          </div>
+          <ScienceCapitalPanel text={newsStory.scienceCapitalLink} />
+        </div>
       </SectionCard>
 
       <SectionCard eyebrow="2 · Local notable figure">
-        <h4 className="mt-2 text-xl">
-          {notableFigure.name}
-          {notableFigure.dates && (
-            <span className="font-normal text-ef-indigo/60"> ({notableFigure.dates})</span>
-          )}{" "}
-          — {notableFigure.location}
-        </h4>
-        <p className="mt-3 text-[1.0625rem]">{notableFigure.summary}</p>
-        <ScienceCapitalCallout text={notableFigure.scienceCapitalLink} />
-        <DimensionPills dimensions={notableFigure.dimensions} />
+        <div className="mt-2 grid gap-6 lg:grid-cols-[7fr_3fr]">
+          <div>
+            <h4 className="text-xl">
+              {notableFigure.name}
+              {notableFigure.dates && (
+                <span className="font-normal text-ef-indigo/60">
+                  {" "}
+                  ({notableFigure.dates})
+                </span>
+              )}{" "}
+              — {notableFigure.location}
+            </h4>
+            <p className="mt-3 text-[1.0625rem]">{notableFigure.summary}</p>
+            <DimensionPills dimensions={notableFigure.dimensions} />
+          </div>
+          <ScienceCapitalPanel text={notableFigure.scienceCapitalLink} />
+        </div>
       </SectionCard>
 
       <SectionCard eyebrow="3 · Two local jobs">

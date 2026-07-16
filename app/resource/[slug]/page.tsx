@@ -50,8 +50,17 @@ export default async function ResourcePage({
                 <h1 className="mt-1 text-3xl sm:text-[2.5rem]">
                   {resource.title}
                 </h1>
-                <div className="mt-4">
+                <div className="mt-4 flex flex-col items-start gap-[30px]">
                   <span className="ef-pill !bg-white/70">{resource.ageRange}</span>
+                  {loggedIn && (
+                    <a
+                      href={resource.downloadUrl ?? "#"}
+                      className="ef-btn !px-6 !py-3 !text-lg"
+                    >
+                      <DownloadIcon className="fill-white" />
+                      Download
+                    </a>
+                  )}
                 </div>
               </div>
             </section>
@@ -122,7 +131,7 @@ export default async function ResourcePage({
               {loggedIn && (
                 <a
                   href={resource.downloadUrl ?? "#"}
-                  className="ef-btn mt-6 !px-8 !py-4 !text-lg"
+                  className="ef-btn mt-6 !px-7 !py-3.5 !text-lg"
                 >
                   <DownloadIcon className="fill-white" />
                   Download

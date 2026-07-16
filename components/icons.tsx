@@ -110,6 +110,54 @@ export function HandsIcon({ className }: { className?: string }) {
   );
 }
 
+export function PupilIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+      <path d="M12 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM9.5 8A2.5 2.5 0 007 10.5V15h1.75v7h6.5v-7H17v-4.5A2.5 2.5 0 0014.5 8h-5z" />
+    </svg>
+  );
+}
+
+export function LocationIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+      <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z" />
+    </svg>
+  );
+}
+
+export function InterestIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+      <path d="M9 20a1 1 0 001 1h4a1 1 0 001-1v-1H9v1zm3-18A7 7 0 007.5 14.4c.6.7 1.2 1.5 1.4 2.6h6.2c.2-1.1.8-1.9 1.4-2.6A7 7 0 0012 2z" />
+    </svg>
+  );
+}
+
+export function FamilyIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+      <path d="M8 6.5A2.25 2.25 0 108 11a2.25 2.25 0 000-4.5zm8 0A2.25 2.25 0 1016 11a2.25 2.25 0 000-4.5zM8 12c-2.2 0-4 1.6-4 3.6V18h8v-2.4C12 13.6 10.2 12 8 12zm8 0c-.5 0-1 .06-1.45.24C15.9 13.05 16.8 14.4 16.8 16v2H20v-2.4c0-2-1.8-3.6-4-3.6z" />
+    </svg>
+  );
+}
+
+export function DocumentIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+      <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9l-7-7zm0 1.5L18.5 9H13V3.5zM7.5 12h9v1.5h-9V12zm0 3.5h9V17h-9v-1.5z" />
+    </svg>
+  );
+}
+
+export function EditIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+      <path d="M4 16.5V20h3.5L17.81 9.69l-3.5-3.5L4 16.5zM20.71 7a1 1 0 000-1.41l-2.3-2.3a1 1 0 00-1.41 0l-1.7 1.7 3.5 3.5L20.71 7z" />
+    </svg>
+  );
+}
+
 export function VideoIcon({ className }: { className?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" className={className}>
