@@ -22,14 +22,14 @@ export function RelatedResources({
           </a>
         </h3>
       </div>
-      <div className="ef-section mt-6 overflow-x-auto pb-4">
+      <div className="ef-section mt-4 overflow-x-auto pb-8 pt-2">
         <div className="flex gap-5">
           {resource.related.map((card) => {
             const action = card.action ?? "download";
             return (
               <article
                 key={card.title}
-                className="flex w-[300px] shrink-0 flex-col gap-y-4"
+                className="flex w-[300px] shrink-0 flex-col gap-y-4 rounded-2xl bg-ef-tint-page p-4 transition duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-[0_12px_28px_rgba(17,14,99,0.14)]"
               >
                 <figure className="relative overflow-hidden rounded-2xl">
                   <Image

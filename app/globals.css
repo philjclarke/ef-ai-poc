@@ -16,12 +16,14 @@
   --color-ef-box: #f2f2f7;
   --color-ef-line: #d5d5e4;
   --color-ef-border: #cac9dd;
+  --color-ef-tint: #eaf4f4;
+  --color-ef-tint-page: #f7fbfb;
   --font-heading: var(--font-poppins), "Arial", sans-serif;
   --font-body: var(--font-inter), "Arial", sans-serif;
 }
 
 body {
-  background: #ffffff;
+  background: var(--color-ef-tint-page);
   color: var(--color-ef-indigo);
   font-family: var(--font-body);
   font-size: 1.125rem;
@@ -76,3 +78,4 @@ h6 {
   border-radius: 16px;
   border: 1px solid var(--color-ef-line);
 }
+

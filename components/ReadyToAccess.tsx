@@ -24,7 +24,7 @@ export function ReadyToAccess({ signInHref }: { signInHref: string }) {
           href={signInHref}
           className="ef-btn w-full !border-white !bg-white !text-ef-indigo"
         >
-          Log in
+          Login to download this resource
         </Link>
       </div>
       <p className="text-base">

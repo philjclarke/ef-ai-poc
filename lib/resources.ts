@@ -17,6 +17,7 @@ export type Resource = {
   defaultTopic: string;
   description: string;
   image: string;
+  bannerImage?: string;
   downloadUrl?: string;
   topics: string[];
   about: string[];
@@ -37,6 +38,7 @@ export const resources: Resource[] = [
     description:
       "Keep your class busy this autumn with twelve days of 10-minute activities including fun science questions and words of the day.",
     image: "/ef/autumn-science-hunt.png",
+    bannerImage: "/ef/nutkin-1.jpg",
     downloadUrl:
       "https://energisingfutures.co.uk/wp-content/uploads/2025/09/EF_AutumnScienceHunt_Primary_Presentation.pptx",
     topics: [
@@ -127,6 +129,7 @@ export const resources: Resource[] = [
     description:
       "Use this classroom poster to answer questions about the order and sizes of planets in our solar system.",
     image: "/ef/planets-of-the-solar-system-poster.jpg",
+    bannerImage: "/ef/solar-system-1.jpg",
     topics: ["Earth and space"],
     about: [
       "Use this classroom poster to answer questions about the order and sizes of planets in our solar system.",
@@ -191,6 +194,7 @@ export const resources: Resource[] = [
     description:
       "Classroom posters of the periodic table, available in simple and detailed versions (with and without lanthanides and actinides).",
     image: "/ef/periodic-table-posters.jpg",
+    bannerImage: "/ef/periodic-table-1.jpg",
     topics: ["Atomic structure and the periodic table"],
     about: [
       "A classroom poster of the periodic table, available in simple and detailed versions (with and without lanthanides and actinides).",

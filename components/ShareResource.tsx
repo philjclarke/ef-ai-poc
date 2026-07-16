@@ -39,7 +39,7 @@ export function ShareResource({ slug }: { slug: string }) {
       <div className="my-5">
         <button onClick={generateShareLink} className="ef-btn">
           <ShareIcon className="size-4 fill-white" />
-          Share
+          Share with your Students
         </button>
       </div>
       {shareUrl && (

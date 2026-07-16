@@ -17,23 +17,32 @@ const circleClasses =
 
 // Logged in: toggles locally (persistence is out of scope for the prototype).
 // Logged out: links to sign-in, matching the live site's /login/ bookmark link.
+// inverted: white circle with an indigo icon, for sitting on photos.
 export function BookmarkButton({
   loggedIn,
   signInHref,
+  inverted = false,
 }: {
   loggedIn: boolean;
   signInHref: string;
+  inverted?: boolean;
 }) {
   const [active, setActive] = useState(false);
+  const neutralClasses = inverted
+    ? `${circleClasses} !border-white bg-white`
+    : `${circleClasses} bg-ef-indigo`;
+  const neutralIcon = (
+    <BookmarkIcon className={inverted ? "fill-ef-indigo" : "fill-white"} />
+  );
 
   if (!loggedIn) {
     return (
       <Link
         href={signInHref}
         aria-label="Log in to add to bookmarks"
-        className={`${circleClasses} bg-ef-indigo`}
+        className={neutralClasses}
       >
-        <BookmarkIcon className="fill-white" />
+        {neutralIcon}
       </Link>
     );
   }
@@ -43,13 +52,9 @@ export function BookmarkButton({
       aria-label={active ? "Remove bookmark" : "Add to bookmarks"}
       aria-pressed={active}
       onClick={() => setActive(!active)}
-      className={`${circleClasses} ${active ? "bg-white" : "bg-ef-indigo"}`}
+      className={active ? `${circleClasses} ${inverted ? "!border-white " : ""}bg-white` : neutralClasses}
     >
-      {active ? (
-        <BookmarkFilledIcon className="fill-ef-indigo" />
-      ) : (
-        <BookmarkIcon className="fill-white" />
-      )}
+      {active ? <BookmarkFilledIcon className="fill-ef-indigo" /> : neutralIcon}
     </button>
   );
 }

@@ -1,9 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookmarkButton } from "@/components/BookmarkButton";
 import { ScienceCapitalGenerator } from "@/components/generator/ScienceCapitalGenerator";
-import { DownloadIcon, SquiggleIcon } from "@/components/icons";
+import { DownloadIcon } from "@/components/icons";
 import { ReadyToAccess } from "@/components/ReadyToAccess";
 import { RelatedResources } from "@/components/RelatedResources";
 import { ShareResource } from "@/components/ShareResource";
@@ -30,96 +29,100 @@ export default async function ResourcePage({
     <>
       <SiteHeader loggedIn={loggedIn} />
       <main className="flex-1">
-        <section
-          className="bg-ef-teal"
-          style={{
-            backgroundImage: "url(/ef/assorted-icons-1.svg)",
-            backgroundPosition: "right -15px top 30px",
-            backgroundSize: "660px",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <div className="ef-section py-10 sm:py-12">
-            <h2 className="hidden text-lg underline sm:block">
-              <a href="#">{resource.phase}</a>
-            </h2>
-            <h1 className="mt-1 text-3xl sm:text-[2.5rem]">{resource.title}</h1>
-          </div>
-        </section>
+        <div className="ef-section pt-2">
+          {resource.bannerImage ? (
+            <section
+              style={{ "--banner-img": `url(${resource.bannerImage})` } as React.CSSProperties}
+              className="relative flex min-h-[280px] items-center rounded-2xl bg-[#82c5c4] px-6 py-8 sm:px-10 sm:py-10 md:bg-[image:var(--banner-img)] md:bg-[length:auto_100%] md:bg-right md:bg-no-repeat"
+            >
+              <div className="absolute right-4 top-4">
+                <BookmarkButton
+                  loggedIn={loggedIn}
+                  signInHref={signInHref}
+                  inverted
+                />
+              </div>
+              <div className="md:max-w-[55%]">
+                <h2 className="hidden text-lg underline sm:block">
+                  <a href="#">{resource.phase}</a>
+                </h2>
+                <h1 className="mt-1 text-3xl sm:text-[2.5rem]">
+                  {resource.title}
+                </h1>
+                <div className="mt-4">
+                  <span className="ef-pill !bg-white/70">{resource.ageRange}</span>
+                </div>
+              </div>
+            </section>
+          ) : (
+            <section className="rounded-2xl bg-ef-teal px-6 py-8 sm:px-10 sm:py-10">
+              <div className="grid items-center gap-6 lg:grid-cols-12">
+                <div className="lg:col-span-7">
+                  <h2 className="hidden text-lg underline sm:block">
+                    <a href="#">{resource.phase}</a>
+                  </h2>
+                  <h1 className="mt-1 text-3xl sm:text-[2.5rem]">
+                    {resource.title}
+                  </h1>
+                </div>
+                <div className="relative lg:col-span-5">
+                  <div className="overflow-hidden rounded-xl">
+                    <Image
+                      src={resource.image}
+                      alt=""
+                      width={998}
+                      height={614}
+                      className="w-full"
+                      priority
+                    />
+                  </div>
+                  <div className="absolute right-3 top-3 flex items-center gap-3">
+                    <span className="ef-pill !bg-ef-teal">{resource.ageRange}</span>
+                    <BookmarkButton loggedIn={loggedIn} signInHref={signInHref} />
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+        </div>
 
         <section className="ef-section grid gap-6 pb-20 pt-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <div className="relative">
-              <div className="overflow-hidden rounded-2xl">
-                <Image
-                  src={resource.image}
-                  alt=""
-                  width={998}
-                  height={614}
-                  className="w-full"
-                  priority
-                />
-              </div>
-              <div className="absolute right-4 top-4 flex items-center gap-3">
-                <span className="ef-pill !bg-ef-teal">{resource.ageRange}</span>
-                <BookmarkButton loggedIn={loggedIn} signInHref={signInHref} />
-              </div>
+            <h2 className="mb-4 text-[2rem]">About this resource</h2>
+            <div className="space-y-4 text-[1.0625rem] leading-relaxed">
+              {resource.about.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
-
-            <div className="ef-bordered mt-5 p-6 sm:p-10">
-              <h2 className="mb-4 text-2xl">About this resource</h2>
-              <p className="text-[1.0625rem]">
-                <strong>Topics: </strong>
-                {resource.topics.join(", ")}
+            {loggedIn && (
+              <a
+                href={resource.downloadUrl ?? "#"}
+                className="ef-btn mt-6 !px-8 !py-4 !text-lg"
+              >
+                <DownloadIcon className="fill-white" />
+                Download
+              </a>
+            )}
+            <div className="mt-6 rounded-xl bg-ef-box p-4 sm:p-5">
+              <p className="font-heading text-xs font-bold uppercase tracking-wide text-ef-indigo/60">
+                Topics
               </p>
-              <div className="mt-4 space-y-4 text-[1.0625rem] leading-relaxed">
-                {resource.about.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+              <ul className="mt-2.5 flex flex-wrap gap-1.5">
+                {resource.topics.map((topic) => (
+                  <li key={topic} className="ef-pill !bg-white !px-3 !py-1.5 !text-sm">
+                    {topic}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
 
           <div className="lg:col-span-5">
-            <Link
-              href={loggedIn ? (resource.downloadUrl ?? "#") : signInHref}
-              className="ef-btn w-full !py-6 !text-xl"
-            >
-              <DownloadIcon className="fill-white" />
-              Download
-            </Link>
-
-            <div className="mt-5 grid gap-5">
-              {loggedIn ? (
-                <>
-                  <ShareResource slug={resource.slug} />
-                  <div className="rounded-2xl bg-ef-indigo p-6 text-center text-white sm:p-10">
-                    <SquiggleIcon className="mx-auto mb-4 w-9 fill-ef-yellow" />
-                    <p className="font-heading text-sm font-bold uppercase tracking-wide text-ef-yellow">
-                      New · AI-powered
-                    </p>
-                    <h4 className="mt-2 text-xl">
-                      Make this resource local to your class
-                    </h4>
-                    <p className="mt-3 text-[1.0625rem] text-white/85">
-                      Generate a bespoke Science Capital teaching resource for{" "}
-                      {resource.title.toLowerCase()} — built around your students,
-                      their families and your local area.
-                    </p>
-                    <div className="mt-5">
-                      <a
-                        href="#science-capital-generator"
-                        className="ef-btn w-full !border-white !bg-white !text-ef-indigo"
-                      >
-                        Try it below
-                      </a>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <ReadyToAccess signInHref={signInHref} />
-              )}
-            </div>
+            {loggedIn ? (
+              <ShareResource slug={resource.slug} />
+            ) : (
+              <ReadyToAccess signInHref={signInHref} />
+            )}
           </div>
         </section>
 

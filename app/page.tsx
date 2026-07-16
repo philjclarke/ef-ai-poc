@@ -18,16 +18,8 @@ export default async function HomePage({
     <>
       <SiteHeader loggedIn={loggedIn} />
       <main className="flex-1">
-        <section
-          className="bg-ef-teal"
-          style={{
-            backgroundImage: "url(/ef/assorted-icons-1.svg)",
-            backgroundPosition: "right -15px top 30px",
-            backgroundSize: "660px",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <div className="ef-section py-12 sm:py-16">
+        <div className="ef-section pt-2">
+          <section className="rounded-2xl bg-ef-teal px-6 py-[3.6rem] sm:bg-[url(/ef/assorted-icons-1.svg)] sm:bg-[length:700px] sm:bg-[position:right_-380px_center] sm:bg-no-repeat sm:px-10 sm:py-[4.8rem] min-[900px]:bg-[position:right_-260px_center] min-[1180px]:bg-[position:right_-150px_center]">
             <p className="font-heading text-sm font-bold uppercase tracking-wide">
               Prototype
             </p>
@@ -39,14 +31,17 @@ export default async function HomePage({
               Science Capital content built around your students&apos; interests,
               their families&apos; knowledge and your local community.
             </p>
-          </div>
-        </section>
+          </section>
+        </div>
 
         <section className="ef-section py-14">
-          <h2 className="text-2xl">Try it on a resource</h2>
+          <h2 className="text-2xl">Featured resources</h2>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {resources.map((resource) => (
-              <article key={resource.slug} className="flex flex-col gap-y-4">
+              <article
+                key={resource.slug}
+                className="flex flex-col gap-y-4 rounded-2xl bg-ef-tint-page p-4 transition duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-[0_12px_28px_rgba(17,14,99,0.14)]"
+              >
                 <figure className="relative overflow-hidden rounded-2xl">
                   <Link href={`/resource/${resource.slug}${stateSuffix}`}>
                     <Image
