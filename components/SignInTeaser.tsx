@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SquiggleIcon } from "./icons";
+import { SparklesIcon } from "./icons";
 
 const unlockItems = [
   "A local news story linked to the topic",
@@ -15,9 +15,9 @@ export function SignInTeaser({ slug }: { slug: string }) {
 
   return (
     <div className="rounded-2xl bg-ef-indigo p-6 text-white sm:p-10">
-      <SquiggleIcon className="mb-4 w-9 fill-ef-yellow" />
+      <SparklesIcon className="mb-4 w-9" />
       <p className="font-heading text-sm font-bold uppercase tracking-wide text-ef-yellow">
-        New · AI-powered
+        AI-powered
       </p>
       <h3 className="mt-2 text-2xl sm:text-3xl">
         Make this resource local to your class

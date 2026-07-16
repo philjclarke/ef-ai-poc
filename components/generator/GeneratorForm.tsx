@@ -16,11 +16,19 @@ type GeneratorFormProps = {
 };
 
 export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorFormProps) {
-  const [topic, setTopic] = useState(resource.defaultTopic);
-  const [yearGroup, setYearGroup] = useState(resource.yearGroups[0]);
+  const topic = resource.defaultTopic;
+  const [yearGroups, setYearGroups] = useState<string[]>([resource.yearGroups[0]]);
   const [location, setLocation] = useState(mockSchoolProfile.location);
   const [interests, setInterests] = useState<string[]>([]);
   const [occupations, setOccupations] = useState<string[]>([]);
+
+  function toggleYearGroup(yearGroup: string) {
+    setYearGroups((current) =>
+      current.includes(yearGroup)
+        ? current.filter((yg) => yg !== yearGroup)
+        : [...current, yearGroup]
+    );
+  }
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -28,7 +36,7 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
       webAccountId: mockSchoolProfile.webAccountId,
       resourceId: resource.slug,
       topic,
-      yearGroup,
+      yearGroup: yearGroups.join(", "),
       location,
       interests,
       occupations,
@@ -36,34 +44,28 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-5">
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="topic" className="block text-base font-bold">
-            Topic
-          </label>
-          <input
-            id="topic"
-            value={topic}
-            required
-            className={fieldClasses}
-            onChange={(e) => setTopic(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="yearGroup" className="block text-base font-bold">
-            Year group
-          </label>
-          <select
-            id="yearGroup"
-            value={yearGroup}
-            className={fieldClasses}
-            onChange={(e) => setYearGroup(e.target.value)}
-          >
-            {resource.yearGroups.map((yg) => (
-              <option key={yg}>{yg}</option>
-            ))}
-          </select>
+    <form onSubmit={handleSubmit} className="grid gap-4">
+      <div>
+        <span className="block text-base font-bold">Year group</span>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {resource.yearGroups.map((yg) => {
+            const selected = yearGroups.includes(yg);
+            return (
+              <button
+                key={yg}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => toggleYearGroup(yg)}
+                className={`ef-pill !px-3.5 !py-2 transition ${
+                  selected
+                    ? "!bg-ef-indigo !text-white"
+                    : "!border !border-ef-border !bg-white hover:!border-ef-indigo"
+                }`}
+              >
+                {yg}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -72,8 +74,7 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
           Location
         </label>
         <p className="mt-0.5 text-sm text-ef-indigo/60">
-          Pre-filled from your school profile ({mockSchoolProfile.schoolName}) — edit if
-          you like
+          Pre-filled from your school profile
         </p>
         <input
           id="location"
@@ -87,7 +88,7 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
       <TagInput
         id="interests"
         label="Student interests"
-        hint="Press Enter after each one — e.g. Minecraft, gymnastics, football"
+        hint="Press Enter after each one"
         placeholder="Add an interest…"
         tags={interests}
         onChange={setInterests}
@@ -96,7 +97,7 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
       <TagInput
         id="occupations"
         label="Parent / caregiver occupations"
-        hint="Press Enter after each one — e.g. warehouse manager, physiotherapist"
+        hint="Press Enter after each one"
         placeholder="Add an occupation…"
         tags={occupations}
         onChange={setOccupations}
@@ -105,7 +106,7 @@ export function GeneratorForm({ resource, isGenerating, onGenerate }: GeneratorF
       <button
         type="submit"
         disabled={isGenerating}
-        className="ef-btn mt-1 justify-self-start !px-9 !py-4 !text-xl disabled:cursor-not-allowed disabled:opacity-60"
+        className="ef-btn mt-1 justify-self-start !px-8 !py-3.5 !text-lg disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isGenerating ? "Generating…" : "Generate teaching resource"}
       </button>

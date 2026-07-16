@@ -74,6 +74,12 @@ export default async function HomePage({
                 <p className="text-[1.0625rem] leading-relaxed">
                   {resource.description}
                 </p>
+                <Link
+                  href={`/resource/${resource.slug}${stateSuffix}`}
+                  className="ef-btn mt-auto w-full !py-4"
+                >
+                  View lesson
+                </Link>
               </article>
             ))}
           </div>

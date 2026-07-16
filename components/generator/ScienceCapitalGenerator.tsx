@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { SquiggleIcon } from "@/components/icons";
+import { SparklesIcon } from "@/components/icons";
 import type { Resource } from "@/lib/resources";
 import type { GenerateRequest, TeachingResource } from "@/lib/types";
 import { GeneratedResource } from "./GeneratedResource";
@@ -38,10 +38,18 @@ function LoadingState() {
   );
 }
 
-export function ScienceCapitalGenerator({ resource }: { resource: Resource }) {
+// Owns the About (40%) / generator (60%) grid so the generated output can
+// break out to full page width beneath it.
+export function ScienceCapitalGenerator({
+  resource,
+  aboutColumn,
+}: {
+  resource: Resource;
+  aboutColumn: React.ReactNode;
+}) {
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [result, setResult] = useState<TeachingResource | null>(null);
-  const resultRef = useRef<HTMLDivElement>(null);
+  const outputRef = useRef<HTMLDivElement>(null);
 
   async function handleGenerate(request: GenerateRequest) {
     setStatus("loading");
@@ -60,46 +68,52 @@ export function ScienceCapitalGenerator({ resource }: { resource: Resource }) {
   }
 
   useEffect(() => {
-    if (status === "done") {
-      resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (status === "loading" || status === "done") {
+      outputRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [status]);
 
   return (
-    <div className="grid gap-6">
-      <div className="ef-bordered bg-white p-6 sm:p-10">
-        <SquiggleIcon className="mb-4 w-9 fill-ef-indigo" />
-        <p className="font-heading text-sm font-bold uppercase tracking-wide">
-          New · AI-powered
-        </p>
-        <h3 className="mt-2 text-2xl">Make this resource local to your class</h3>
-        <p className="mt-2 max-w-2xl text-[1.0625rem]">
-          Tell us a little about your students and we&apos;ll generate a bespoke
-          Science Capital teaching resource — a local news story, a local role model,
-          two local jobs and five conversation starters.
-        </p>
-        <div className="mt-6">
-          <GeneratorForm
-            resource={resource}
-            isGenerating={status === "loading"}
-            onGenerate={handleGenerate}
-          />
+    <>
+      <section className="ef-section grid gap-8 pb-16 pt-12 lg:grid-cols-5">
+        <div className="lg:col-span-3">{aboutColumn}</div>
+        <div id="science-capital-generator" className="scroll-mt-8 lg:col-span-2">
+          <div className="ai-gradient-border">
+            <div className="rounded-[15px] bg-white p-6 sm:p-8">
+              <div className="flex items-center gap-1.5">
+                <SparklesIcon className="w-7" />
+                <p className="font-heading text-sm font-bold uppercase tracking-wide">
+                  AI-powered
+                </p>
+              </div>
+              <h3 className="mt-1 text-2xl">Supercharge this resource</h3>
+              <p className="mt-1.5 text-[1.0625rem]">
+                Tell us a little about your students and we&apos;ll generate a
+                bespoke Science Capital teaching resource.
+              </p>
+              <div className="mt-5">
+                <GeneratorForm
+                  resource={resource}
+                  isGenerating={status === "loading"}
+                  onGenerate={handleGenerate}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {status === "loading" && <LoadingState />}
-
-      {status === "error" && (
-        <p className="ef-bordered bg-ef-coral/15 p-5 text-[1.0625rem]">
-          Something went wrong generating your resource. Please try again.
-        </p>
+      {status !== "idle" && (
+        <section ref={outputRef} className="ef-section scroll-mt-8 pb-24">
+          {status === "loading" && <LoadingState />}
+          {status === "error" && (
+            <p className="ef-bordered bg-ef-coral/15 p-5 text-[1.0625rem]">
+              Something went wrong generating your resource. Please try again.
+            </p>
+          )}
+          {status === "done" && result && <GeneratedResource resource={result} />}
+        </section>
       )}
-
-      {status === "done" && result && (
-        <div ref={resultRef} className="scroll-mt-8">
-          <GeneratedResource resource={result} />
-        </div>
-      )}
-    </div>
+    </>
   );
 }

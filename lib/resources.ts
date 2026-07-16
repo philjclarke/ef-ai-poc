@@ -21,6 +21,7 @@ export type Resource = {
   downloadUrl?: string;
   topics: string[];
   about: string[];
+  benefits: string[];
   relatedTopic: string;
   related: RelatedCard[];
 };
@@ -46,15 +47,21 @@ export const resources: Resource[] = [
       "Weather",
       "Animals, including humans",
       "Everyday materials",
+      "Sound",
       "Living things and their habitats",
       "Plants",
       "Seasonal changes",
       "Working scientifically",
-      "Sound",
     ],
     about: [
       "Bring autumnal science to life by linking classroom learning to the great outdoors with this quiz. Keep your class busy with twelve days of 10-minute activities including fun science questions, word of the day and a dive deeper task.",
-      "Get your class hunting for the incredible science happening all around us this cozy season.",
+      "Get your class hunting for the incredible science happening all around us this cozy season. Each short activity is designed to fit into a busy timetable, needs little or no preparation, and turns everyday walks, playtimes and journeys home into opportunities for scientific observation.",
+    ],
+    benefits: [
+      "Turns the local outdoors into a science classroom, connecting lessons to what children already notice at home and in their community.",
+      "Twelve bite-size, low-prep activities keep observation and enquiry skills sharp without extra planning or equipment.",
+      "Builds early scientific vocabulary through a daily word of the day.",
+      "Encourages families to explore autumn together, valuing home and community knowledge as real science capital.",
     ],
     relatedTopic: "Animals, including humans",
     related: [
@@ -133,6 +140,13 @@ export const resources: Resource[] = [
     topics: ["Earth and space"],
     about: [
       "Use this classroom poster to answer questions about the order and sizes of planets in our solar system.",
+      "Vivid and clearly labelled, it gives pupils an at-a-glance reference for exploring distance, scale and the features that make each planet unique — a springboard for questions, comparisons and creative writing about space.",
+    ],
+    benefits: [
+      "Gives pupils a permanent visual reference for the order, size and scale of the planets.",
+      "Sparks curiosity about space careers and the real scientists exploring our solar system today.",
+      "Supports comparison and enquiry skills as pupils rank, measure and question what they see.",
+      "Works as a shared talking point for group discussion and independent research.",
     ],
     relatedTopic: "Earth and space",
     related: [
@@ -198,6 +212,13 @@ export const resources: Resource[] = [
     topics: ["Atomic structure and the periodic table"],
     about: [
       "A classroom poster of the periodic table, available in simple and detailed versions (with and without lanthanides and actinides).",
+      "Colour-coded by element group, it helps students find their way around periods, groups and trends, turning a dense reference into an everyday tool for lessons, discussion and revision.",
+    ],
+    benefits: [
+      "A clear, colour-coded reference available in simple and detailed versions to match the class.",
+      "Helps students navigate groups, periods and trends with growing confidence.",
+      "Connects abstract chemistry to real materials, local industry and careers.",
+      "A permanent classroom aid that supports recall and revision throughout the topic.",
     ],
     relatedTopic: "Atomic structure and the periodic table",
     related: [

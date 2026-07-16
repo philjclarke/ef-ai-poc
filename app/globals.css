@@ -79,3 +79,38 @@ h6 {
   border: 1px solid var(--color-ef-line);
 }
 
+/* Rotating colourful gradient border to make the AI panel feel distinct. */
+@property --ai-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes ai-border-spin {
+  to {
+    --ai-angle: 360deg;
+  }
+}
+
+.ai-gradient-border {
+  border-radius: 18px;
+  padding: 3px;
+  background: conic-gradient(
+    from var(--ai-angle),
+    var(--color-ef-coral),
+    var(--color-ef-yellow),
+    var(--color-ef-green),
+    var(--color-ef-teal),
+    var(--color-ef-blue),
+    var(--color-ef-purple),
+    var(--color-ef-coral)
+  );
+  animation: ai-border-spin 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-gradient-border {
+    animation: none;
+  }
+}
+
