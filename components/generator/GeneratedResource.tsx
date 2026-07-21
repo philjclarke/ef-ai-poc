@@ -26,6 +26,28 @@ function ScienceCapitalPanel({ text }: { text: string }) {
   );
 }
 
+// Placeholder image slot — real news/figure imagery would drop in here.
+function ImagePlaceholder({
+  label,
+  className,
+}: {
+  label: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`flex flex-col items-center justify-center gap-2 rounded-xl bg-ef-mist text-ef-indigo/40 ${
+        className ?? ""
+      }`}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-9 fill-current">
+        <path d="M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1zm1 2v7.5l4-4 3 3 3-3 4 4V7H5zm3.5 3.5a1.75 1.75 0 100-3.5 1.75 1.75 0 000 3.5z" />
+      </svg>
+      <span className="text-xs font-medium">{label}</span>
+    </div>
+  );
+}
+
 function SkillChips({ label, skills }: { label: string; skills: string[] }) {
   return (
     <div className="mt-4">
@@ -60,9 +82,7 @@ function JobCard({ job }: { job: LocalJob }) {
         {job.qualifications}
       </p>
       <p className="mt-3 text-[1.0625rem]">{job.summary}</p>
-      <SkillChips label="Future skills" skills={job.futureSkills} />
-      <SkillChips label="SkillsBuilder" skills={job.skillsBuilderSkills} />
-      <div className="mt-4">
+      <div className="mt-4 rounded-xl bg-white p-4">
         <p className="font-heading text-xs font-bold uppercase tracking-wide text-ef-indigo/60">
           Connections for your class
         </p>
@@ -72,6 +92,8 @@ function JobCard({ job }: { job: LocalJob }) {
           ))}
         </ul>
       </div>
+      <SkillChips label="Future skills" skills={job.futureSkills} />
+      <SkillChips label="SkillsBuilder" skills={job.skillsBuilderSkills} />
       <DimensionPills dimensions={job.dimensions} />
     </div>
   );
@@ -80,7 +102,7 @@ function JobCard({ job }: { job: LocalJob }) {
 function NewsStorySection({ resource }: { resource: TeachingResource }) {
   const { newsStory } = resource;
   return (
-    <div className="grid gap-6 lg:grid-cols-[7fr_3fr]">
+    <div className="grid gap-6 lg:grid-cols-[1.7fr_1fr_1.2fr]">
       <div>
         <h4 className="text-xl">{newsStory.headline}</h4>
         <p className="mt-3 text-[1.0625rem]">{newsStory.summary}</p>
@@ -94,6 +116,7 @@ function NewsStorySection({ resource }: { resource: TeachingResource }) {
         </a>
         <DimensionPills dimensions={newsStory.dimensions} />
       </div>
+      <ImagePlaceholder label="Story image" className="aspect-[4/3]" />
       <ScienceCapitalPanel text={newsStory.scienceCapitalLink} />
     </div>
   );
@@ -102,7 +125,11 @@ function NewsStorySection({ resource }: { resource: TeachingResource }) {
 function FigureSection({ resource }: { resource: TeachingResource }) {
   const { notableFigure } = resource;
   return (
-    <div className="grid gap-6 lg:grid-cols-[7fr_3fr]">
+    <div className="grid gap-6 lg:grid-cols-[150px_1.6fr_1.2fr]">
+      <ImagePlaceholder
+        label="Photo"
+        className="aspect-[3/4] w-full max-w-[160px]"
+      />
       <div>
         <h4 className="text-xl">
           {notableFigure.name}
@@ -135,11 +162,9 @@ function JobsSection({ resource }: { resource: TeachingResource }) {
 function StartersSection({ resource }: { resource: TeachingResource }) {
   return (
     <ol className="grid gap-4">
-      {resource.conversationStarters.map((starter, index) => (
+      {resource.conversationStarters.map((starter) => (
         <li key={starter.title} className="ef-bordered bg-ef-box p-5">
-          <h4 className="text-lg">
-            {index + 1}. {starter.title}
-          </h4>
+          <h4 className="text-lg">{starter.title}</h4>
           <p className="mt-2 text-[1.0625rem]">{starter.prompt}</p>
           <ul className="mt-3 flex flex-wrap gap-1.5">
             {starter.connects.map((connect) => (
@@ -251,20 +276,24 @@ export function GeneratedResource({ resource }: { resource: TeachingResource }) 
         all linked to your students&apos; world.
       </p>
 
-      <div className="mt-5 flex flex-wrap gap-2 border-b border-ef-border pb-4">
+      <div
+        role="tablist"
+        className="mt-5 flex flex-wrap gap-x-7 gap-y-1 border-b border-ef-border"
+      >
         {tabs.map((tab, index) => (
           <button
             key={tab.label}
             type="button"
-            aria-pressed={active === index}
+            role="tab"
+            aria-selected={active === index}
             onClick={() => setActive(index)}
-            className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+            className={`-mb-px border-b-[3px] pb-3 text-[1.0625rem] font-bold transition ${
               active === index
-                ? "bg-ef-indigo text-white"
-                : "bg-ef-surface text-ef-indigo hover:bg-ef-mist"
+                ? "border-ef-indigo text-ef-indigo"
+                : "border-transparent text-ef-indigo/50 hover:text-ef-indigo"
             }`}
           >
-            {index + 1}. {tab.label}
+            {tab.label}
           </button>
         ))}
       </div>
