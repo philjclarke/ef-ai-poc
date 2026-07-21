@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
+  CheckIcon,
   DocumentIcon,
   EditIcon,
-  FamilyIcon,
   InterestIcon,
   LocationIcon,
+  PrinterIcon,
   PupilIcon,
+  SaveIcon,
   SparklesIcon,
 } from "@/components/icons";
 import { mockSchoolProfile } from "@/lib/resources";
@@ -96,14 +98,29 @@ export function ScienceCapitalGenerator({
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [result, setResult] = useState<TeachingResource | null>(null);
   const [openPanel, setOpenPanel] = useState<"about" | "edit" | null>(null);
+  const [saved, setSaved] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const savedKey = `saved:${resource.slug}`;
+
+  useEffect(() => {
+    // localStorage is only readable on the client, so sync on mount.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSaved(localStorage.getItem(savedKey) === "true");
+  }, [savedKey]);
+
+  function toggleSave() {
+    const next = !saved;
+    setSaved(next);
+    if (next) localStorage.setItem(savedKey, "true");
+    else localStorage.removeItem(savedKey);
+  }
 
   // Lifted form state so the inputs persist between the input panel and the
   // "Edit inputs" accordion after generating.
   const [yearGroups, setYearGroups] = useState<string[]>([resource.yearGroups[0]]);
   const [location, setLocation] = useState(mockSchoolProfile.location);
   const [interests, setInterests] = useState<string[]>([]);
-  const [occupations, setOccupations] = useState<string[]>([]);
 
   function toggleYearGroup(yearGroup: string) {
     setYearGroups((current) =>
@@ -121,7 +138,7 @@ export function ScienceCapitalGenerator({
       yearGroup: yearGroups.join(", "),
       location,
       interests,
-      occupations,
+      occupations: [],
     };
     setStatus("loading");
     setOpenPanel(null);
@@ -152,8 +169,6 @@ export function ScienceCapitalGenerator({
     onLocationChange: setLocation,
     interests,
     onInterestsChange: setInterests,
-    occupations,
-    onOccupationsChange: setOccupations,
     onSubmit: handleGenerate,
   };
 
@@ -234,18 +249,35 @@ export function ScienceCapitalGenerator({
                       {interest}
                     </MetaItem>
                   ))}
-                  {result.meta.occupations.map((occupation) => (
-                    <MetaItem
-                      key={occupation}
-                      icon={<FamilyIcon className="w-4 fill-ef-indigo" />}
-                    >
-                      {occupation}
-                    </MetaItem>
-                  ))}
                 </div>
               </div>
 
-              <div className="flex shrink-0 items-center gap-2">
+              <div className="flex shrink-0 flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  aria-pressed={saved}
+                  onClick={toggleSave}
+                  className={`inline-flex items-center gap-2 rounded-full border-2 px-4 py-2.5 text-sm font-bold transition ${
+                    saved
+                      ? "border-ef-green bg-ef-green text-white"
+                      : "border-ef-indigo bg-white text-ef-indigo hover:bg-ef-mist"
+                  }`}
+                >
+                  {saved ? (
+                    <CheckIcon className="w-4 fill-current" />
+                  ) : (
+                    <SaveIcon className="w-4 fill-current" />
+                  )}
+                  {saved ? "Saved" : "Save"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-ef-indigo bg-white px-4 py-2.5 text-sm font-bold text-ef-indigo transition hover:bg-ef-mist"
+                >
+                  <PrinterIcon className="w-4 fill-current" />
+                  Print
+                </button>
                 <button
                   type="button"
                   aria-expanded={openPanel === "about"}
@@ -288,7 +320,7 @@ export function ScienceCapitalGenerator({
                     openPanel ? "block" : "hidden lg:block"
                   } ${
                     openPanel
-                      ? "lg:w-2/5 lg:border-l lg:border-ef-border lg:pl-6"
+                      ? "lg:w-2/5 lg:pl-6"
                       : "lg:w-0"
                   }`}
                 >

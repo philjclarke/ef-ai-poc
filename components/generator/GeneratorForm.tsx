@@ -15,8 +15,6 @@ type GeneratorFormProps = {
   onLocationChange: (value: string) => void;
   interests: string[];
   onInterestsChange: (tags: string[]) => void;
-  occupations: string[];
-  onOccupationsChange: (tags: string[]) => void;
   onSubmit: () => void;
   submitLabel?: string;
 };
@@ -30,8 +28,6 @@ export function GeneratorForm({
   onLocationChange,
   interests,
   onInterestsChange,
-  occupations,
-  onOccupationsChange,
   onSubmit,
   submitLabel = "Generate teaching resource",
 }: GeneratorFormProps) {
@@ -89,15 +85,6 @@ export function GeneratorForm({
         placeholder="Add an interest…"
         tags={interests}
         onChange={onInterestsChange}
-      />
-
-      <TagInput
-        id="occupations"
-        label="Parent / caregiver occupations"
-        hint="Press Enter after each one"
-        placeholder="Add an occupation…"
-        tags={occupations}
-        onChange={onOccupationsChange}
       />
 
       <button

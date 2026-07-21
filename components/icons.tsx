@@ -158,6 +158,30 @@ export function EditIcon({ className }: { className?: string }) {
   );
 }
 
+export function PrinterIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+      <path d="M7 3h10v4H7V3zm12 5H5a3 3 0 00-3 3v6h4v3h12v-3h4v-6a3 3 0 00-3-3zm-3 11H8v-4h8v4zm2.5-6.75a1 1 0 110-2 1 1 0 010 2z" />
+    </svg>
+  );
+}
+
+export function SaveIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+      <path d="M5 3h11l3 3v13a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm2 2v5h8V5H7zm5 6a3 3 0 100 6 3 3 0 000-6z" />
+    </svg>
+  );
+}
+
+export function CheckIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+      <path d="M9.55 17.6L4.4 12.45l1.4-1.4 3.75 3.7 8.25-8.25 1.4 1.4z" />
+    </svg>
+  );
+}
+
 export function VideoIcon({ className }: { className?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" className={className}>

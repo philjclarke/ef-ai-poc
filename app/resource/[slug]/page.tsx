@@ -100,6 +100,13 @@ export default async function ResourcePage({
           const aboutColumn = (
             <>
               <h2 className="mb-4 text-[2rem]">About this resource</h2>
+              <Image
+                src={resource.image}
+                alt=""
+                width={998}
+                height={614}
+                className="float-right mb-3 ml-5 w-2/5 max-w-[280px] rounded-xl"
+              />
               <div className="space-y-4 text-[1.0625rem] leading-relaxed">
                 {resource.about.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
@@ -116,7 +123,7 @@ export default async function ResourcePage({
                   </li>
                 ))}
               </ul>
-              <div className="mt-6 rounded-xl bg-ef-box p-4 sm:p-5">
+              <div className="mt-6 clear-both rounded-xl bg-ef-box p-4 sm:p-5">
                 <p className="font-heading text-xs font-bold uppercase tracking-wide text-ef-indigo/60">
                   Topics
                 </p>

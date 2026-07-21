@@ -85,6 +85,30 @@ h6 {
   border: 1px solid var(--color-ef-line);
 }
 
+/* Print takeaway: show only the #printable document, hide the app chrome. */
+#printable {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #printable,
+  #printable * {
+    visibility: visible;
+  }
+
+  #printable {
+    display: block;
+    position: absolute;
+    inset: 0;
+    padding: 24px;
+    color: #000;
+  }
+}
+
 /* Rotating colourful gradient border to make the AI panel feel distinct. */
 @property --ai-angle {
   syntax: "<angle>";
