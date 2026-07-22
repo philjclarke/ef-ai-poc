@@ -29,7 +29,7 @@ export function GeneratorForm({
   interests,
   onInterestsChange,
   onSubmit,
-  submitLabel = "Generate teaching resource",
+  submitLabel = "Generate teaching suggestions",
 }: GeneratorFormProps) {
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();

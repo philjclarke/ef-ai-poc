@@ -38,6 +38,7 @@ export type NewsStory = {
   sourceUrl: string;
   scienceCapitalLink: string;
   dimensions: string[];
+  imageUrl?: string;
 };
 
 export type NotableFigure = {
@@ -47,6 +48,9 @@ export type NotableFigure = {
   summary: string;
   scienceCapitalLink: string;
   dimensions: string[];
+  imageUrl?: string;
+  sourceName?: string;
+  sourceUrl?: string;
 };
 
 export type LocalJob = {
@@ -59,6 +63,8 @@ export type LocalJob = {
   summary: string;
   connections: string[];
   dimensions: string[];
+  sourceName?: string;
+  sourceUrl?: string;
 };
 
 export type ConversationStarter = {

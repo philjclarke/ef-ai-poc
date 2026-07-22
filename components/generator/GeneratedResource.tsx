@@ -1,7 +1,22 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import type { LocalJob, TeachingResource } from "@/lib/types";
+
+function SourceLink({ name, url }: { name?: string; url?: string }) {
+  if (!name || !url) return null;
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      className="mt-3 inline-block text-[1.0625rem] underline"
+    >
+      Source: {name}
+    </a>
+  );
+}
 
 function DimensionPills({ dimensions }: { dimensions: string[] }) {
   return (
@@ -26,14 +41,30 @@ function ScienceCapitalPanel({ text }: { text: string }) {
   );
 }
 
-// Placeholder image slot — real news/figure imagery would drop in here.
-function ImagePlaceholder({
+// Renders a section image, falling back to a labelled placeholder slot when
+// no imagery has been supplied for that section.
+function SectionImage({
+  src,
   label,
   className,
 }: {
+  src?: string;
   label: string;
   className?: string;
 }) {
+  if (src) {
+    return (
+      <div className={`overflow-hidden rounded-xl ${className ?? ""}`}>
+        <Image
+          src={src}
+          alt=""
+          width={600}
+          height={600}
+          className="h-full w-full object-cover"
+        />
+      </div>
+    );
+  }
   return (
     <div
       className={`flex flex-col items-center justify-center gap-2 rounded-xl bg-ef-mist text-ef-indigo/40 ${
@@ -82,6 +113,7 @@ function JobCard({ job }: { job: LocalJob }) {
         {job.qualifications}
       </p>
       <p className="mt-3 text-[1.0625rem]">{job.summary}</p>
+      <SourceLink name={job.sourceName} url={job.sourceUrl} />
       <div className="mt-4 rounded-xl bg-white p-4">
         <p className="font-heading text-xs font-bold uppercase tracking-wide text-ef-indigo/60">
           Connections for your class
@@ -99,34 +131,48 @@ function JobCard({ job }: { job: LocalJob }) {
   );
 }
 
-function NewsStorySection({ resource }: { resource: TeachingResource }) {
+function NewsStorySection({
+  resource,
+  compact,
+}: {
+  resource: TeachingResource;
+  compact: boolean;
+}) {
   const { newsStory } = resource;
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.7fr_1fr_1.2fr]">
+    <div
+      className={`grid gap-6 ${compact ? "" : "lg:grid-cols-[1.7fr_1fr_1.2fr]"}`}
+    >
       <div>
         <h4 className="text-xl">{newsStory.headline}</h4>
         <p className="mt-3 text-[1.0625rem]">{newsStory.summary}</p>
-        <a
-          href={newsStory.sourceUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-3 inline-block text-[1.0625rem] underline"
-        >
-          Source: {newsStory.sourceName}
-        </a>
+        <SourceLink name={newsStory.sourceName} url={newsStory.sourceUrl} />
         <DimensionPills dimensions={newsStory.dimensions} />
       </div>
-      <ImagePlaceholder label="Story image" className="aspect-[4/3]" />
+      <SectionImage
+        src={newsStory.imageUrl}
+        label="Story image"
+        className="aspect-[4/3]"
+      />
       <ScienceCapitalPanel text={newsStory.scienceCapitalLink} />
     </div>
   );
 }
 
-function FigureSection({ resource }: { resource: TeachingResource }) {
+function FigureSection({
+  resource,
+  compact,
+}: {
+  resource: TeachingResource;
+  compact: boolean;
+}) {
   const { notableFigure } = resource;
   return (
-    <div className="grid gap-6 lg:grid-cols-[150px_1.6fr_1.2fr]">
-      <ImagePlaceholder
+    <div
+      className={`grid gap-6 ${compact ? "" : "lg:grid-cols-[150px_1.6fr_1.2fr]"}`}
+    >
+      <SectionImage
+        src={notableFigure.imageUrl}
         label="Photo"
         className="aspect-[3/4] w-full max-w-[160px]"
       />
@@ -142,6 +188,10 @@ function FigureSection({ resource }: { resource: TeachingResource }) {
           — {notableFigure.location}
         </h4>
         <p className="mt-3 text-[1.0625rem]">{notableFigure.summary}</p>
+        <SourceLink
+          name={notableFigure.sourceName}
+          url={notableFigure.sourceUrl}
+        />
         <DimensionPills dimensions={notableFigure.dimensions} />
       </div>
       <ScienceCapitalPanel text={notableFigure.scienceCapitalLink} />
@@ -149,17 +199,23 @@ function FigureSection({ resource }: { resource: TeachingResource }) {
   );
 }
 
-function JobsSection({ resource }: { resource: TeachingResource }) {
+function JobsSection({
+  resource,
+  compact,
+}: {
+  resource: TeachingResource;
+  compact: boolean;
+}) {
   const { jobs } = resource;
   return (
-    <div className="grid gap-5 lg:grid-cols-2">
+    <div className={`grid gap-5 ${compact ? "" : "lg:grid-cols-2"}`}>
       <JobCard job={jobs[0]} />
       <JobCard job={jobs[1]} />
     </div>
   );
 }
 
-function StartersSection({ resource }: { resource: TeachingResource }) {
+function StartersSection({ resource }: { resource: TeachingResource; compact: boolean }) {
   return (
     <ol className="grid gap-4">
       {resource.conversationStarters.map((starter) => (
@@ -216,6 +272,9 @@ function PrintableResource({ resource }: { resource: TeachingResource }) {
         {notableFigure.dates ? ` (${notableFigure.dates})` : ""} — {notableFigure.location}
       </p>
       <p>{notableFigure.summary}</p>
+      {notableFigure.sourceName && (
+        <p>Source: {notableFigure.sourceName} — {notableFigure.sourceUrl}</p>
+      )}
       <p>
         <em>Science Capital link:</em> {notableFigure.scienceCapitalLink}
       </p>
@@ -234,6 +293,9 @@ function PrintableResource({ resource }: { resource: TeachingResource }) {
           <p>Future skills: {job.futureSkills.join(", ")}</p>
           <p>SkillsBuilder: {job.skillsBuilderSkills.join(", ")}</p>
           <p>Connections: {job.connections.join("; ")}</p>
+          {job.sourceName && (
+            <p>Source: {job.sourceName} — {job.sourceUrl}</p>
+          )}
         </div>
       ))}
 
@@ -256,7 +318,13 @@ function PrintableResource({ resource }: { resource: TeachingResource }) {
   );
 }
 
-export function GeneratedResource({ resource }: { resource: TeachingResource }) {
+export function GeneratedResource({
+  resource,
+  compact,
+}: {
+  resource: TeachingResource;
+  compact: boolean;
+}) {
   const [active, setActive] = useState(0);
   const { meta } = resource;
   const ActiveSection = tabs[active].Section;
@@ -268,7 +336,7 @@ export function GeneratedResource({ resource }: { resource: TeachingResource }) 
   return (
     <div>
       <p className="text-[1.0625rem] leading-relaxed">
-        Here&apos;s a bespoke Science Capital resource for{" "}
+        Here&apos;s some bespoke Science Capital suggestions for{" "}
         <strong>{meta.topic}</strong>, tailored to {meta.yearGroup} in{" "}
         {meta.location}
         {interestSuffix}. Use the tabs below to explore each part — a local news
@@ -299,7 +367,7 @@ export function GeneratedResource({ resource }: { resource: TeachingResource }) 
       </div>
 
       <div className="mt-6">
-        <ActiveSection resource={resource} />
+        <ActiveSection resource={resource} compact={compact} />
       </div>
 
       <p className="mt-8 text-center text-sm text-ef-indigo/50">

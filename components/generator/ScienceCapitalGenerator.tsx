@@ -51,7 +51,7 @@ function BuildingState() {
   return (
     <div className="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
       <Eyebrow />
-      <h3 className="mt-1 text-2xl">Building your resource…</h3>
+      <h3 className="mt-1 text-2xl">Building your suggestion</h3>
       <div className="mt-6 space-y-5">
         {buildSteps.map((label, index) => (
           <div key={label}>
@@ -177,8 +177,8 @@ export function ScienceCapitalGenerator({
       <Eyebrow />
       <h3 className="mt-1 text-2xl">Supercharge this resource</h3>
       <p className="mt-1.5 text-[1.0625rem]">
-        Tell us a little about your students and we&apos;ll generate a bespoke
-        Science Capital teaching resource.
+        Tell us a little about your students and we&apos;ll generate bespoke
+        Science Capital teaching suggestions.
       </p>
     </>
   );
@@ -230,7 +230,7 @@ export function ScienceCapitalGenerator({
                 <div className="flex items-center gap-1.5">
                   <SparklesIcon className="w-6" />
                   <p className="font-heading text-sm font-bold uppercase tracking-wide text-[#3f9999]">
-                    Your Science Capital teaching resource
+                    Your Science Capital teaching suggestions
                   </p>
                 </div>
                 <h2 className="mt-1 text-3xl sm:text-4xl">{result.meta.topic}</h2>
@@ -289,7 +289,7 @@ export function ScienceCapitalGenerator({
                   }`}
                 >
                   <DocumentIcon className="w-4 fill-current" />
-                  About this resource
+                  Resource information
                 </button>
                 <button
                   type="button"
@@ -313,7 +313,10 @@ export function ScienceCapitalGenerator({
                     openPanel ? "hidden lg:block" : "block"
                   }`}
                 >
-                  <GeneratedResource resource={result} />
+                  <GeneratedResource
+                    resource={result}
+                    compact={openPanel !== null}
+                  />
                 </div>
                 <div
                   className={`lg:shrink-0 lg:overflow-hidden lg:transition-[width] lg:duration-300 lg:ease-out ${

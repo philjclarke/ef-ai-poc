@@ -48,6 +48,7 @@ const payloads: Record<string, TeachingResource> = {
       scienceCapitalLink:
         "Planting happens in autumn because trees are dormant — a perfect local example of seasonal change children can see in their own park, and proof that people near {location} do science outdoors as part of everyday life.",
       dimensions: ["Science in the news", "Science in everyday life"],
+      imageUrl: "/ef/city-of-trees.webp",
     },
     notableFigure: {
       name: "Leo Grindon",
@@ -58,11 +59,16 @@ const payloads: Record<string, TeachingResource> = {
       scienceCapitalLink:
         "Grindon's story shows children that noticing leaves, seeds and trees around {location} is real science — and that science has always belonged to ordinary Mancunians, not just people in labs.",
       dimensions: ["Scientists are like me", "Science literacy"],
+      imageUrl: "/ef/Leopold_Hartley_Grindon.jpg",
+      sourceName: "Leopold Hartley Grindon — Wikipedia",
+      sourceUrl: "https://en.wikipedia.org/wiki/Leopold_Hartley_Grindon",
     },
     jobs: [
       {
         title: "Ecologist",
         employer: "Greater Manchester Ecology Unit",
+        sourceName: "Ecologist vacancy — Indeed",
+        sourceUrl: "https://uk.indeed.com/viewjob?jk=2d25d5f30e77dc3d",
         route: "degree",
         qualifications:
           "BSc in Ecology, Environmental Science or Biology; often a postgraduate qualification or field survey experience.",
@@ -79,6 +85,8 @@ const payloads: Record<string, TeachingResource> = {
       {
         title: "Horticulture and landscape apprentice",
         employer: "Manchester City Council Parks Team (including Debdale Park)",
+        sourceName: "Apprenticeship vacancy — Indeed",
+        sourceUrl: "https://uk.indeed.com/viewjob?jk=88d7c3c3de2b3fdd",
         route: "apprenticeship",
         qualifications:
           "Level 2 Horticulture apprenticeship — no degree required; GCSEs helpful but enthusiasm for the outdoors matters most.",
@@ -155,11 +163,15 @@ const payloads: Record<string, TeachingResource> = {
       scienceCapitalLink:
         "Lovell's story shows that world-changing space science was built near Manchester by determined people solving practical problems — resilience and problem solving that students can see in their own families too.",
       dimensions: ["Scientists are like me", "Science literacy"],
+      sourceName: "Jodrell Bank Discovery Centre archive",
+      sourceUrl: "https://www.jodrellbank.net/explore/history/",
     },
     jobs: [
       {
         title: "Radio astronomer",
         employer: "Jodrell Bank Centre for Astrophysics, University of Manchester",
+        sourceName: "University of Manchester — Physics & Astronomy careers",
+        sourceUrl: "https://www.physics.manchester.ac.uk/careers/",
         route: "degree",
         qualifications:
           "Physics or Astrophysics degree (BSc/MPhys); many astronomers at Jodrell Bank studied in Manchester.",
@@ -181,6 +193,8 @@ const payloads: Record<string, TeachingResource> = {
       {
         title: "Engineering maintenance apprentice",
         employer: "Jodrell Bank Observatory",
+        sourceName: "Jodrell Bank Observatory — vacancies",
+        sourceUrl: "https://www.jodrellbank.net/vacancies/",
         route: "apprenticeship",
         qualifications:
           "Level 3 Engineering Technician apprenticeship — no degree required; GCSEs in Maths and English usually needed.",
@@ -257,11 +271,15 @@ const payloads: Record<string, TeachingResource> = {
       scienceCapitalLink:
         "Dalton had no wealthy background and no fancy laboratory, and he turned his own way of seeing the world into discovery — students in {location} walk streets named after the man who gave chemistry its atoms.",
       dimensions: ["Scientists are like me", "Science literacy"],
+      sourceName: "Manchester Literary & Philosophical Society",
+      sourceUrl: "https://www.manlitphil.ac.uk/about/history/",
     },
     jobs: [
       {
         title: "Materials scientist",
         employer: "National Graphene Institute, University of Manchester",
+        sourceName: "National Graphene Institute — work with us",
+        sourceUrl: "https://www.graphene.manchester.ac.uk/careers/",
         route: "degree",
         qualifications:
           "Degree in Materials Science, Chemistry or Physics (BSc/MSc); research roles usually need a PhD.",
@@ -283,6 +301,8 @@ const payloads: Record<string, TeachingResource> = {
       {
         title: "Laboratory technician apprentice",
         employer: "Chemical and materials employers across Greater Manchester (e.g. Trafford Park)",
+        sourceName: "Cogent Skills — science apprenticeships",
+        sourceUrl: "https://www.cogentskills.com/apprenticeships/",
         route: "apprenticeship",
         qualifications:
           "Level 3 Laboratory Technician apprenticeship — earn while you learn; GCSEs in Maths, English and Science usually required.",
